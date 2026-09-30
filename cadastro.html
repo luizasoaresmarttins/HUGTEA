@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Crie sua conta gratuita no HUGTEA e tenha acesso a funcionalidades personalizadas.">
+  <title>Criar Conta — HUGTEA</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤗</text></svg>">
+</head>
+<body>
+  <div class="loading-overlay" aria-hidden="true"><div class="loading-spinner"></div></div>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <div class="container">
+      <a href="index.html" class="navbar__logo" aria-label="HUGTEA - Ir para página inicial">
+        <div class="navbar__logo-icon">🤗</div>
+        HUGTEA
+      </a>
+      <div class="navbar__links" id="nav-links">
+        <a href="index.html" class="navbar__link">Início</a>
+        <a href="sobre-tea.html" class="navbar__link">Sobre TEA</a>
+        <a href="recursos.html" class="navbar__link">Recursos</a>
+        <a href="contato.html" class="navbar__link">Contato</a>
+        <a href="login.html" class="navbar__cta">Entrar</a>
+      </div>
+      <button class="navbar__hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <div class="auth-page">
+      <div class="auth-card animate-on-scroll">
+        <div class="auth-card__header">
+          <div class="auth-card__logo">🤗</div>
+          <h1 class="auth-card__title">Junte-se ao HUGTEA</h1>
+          <p class="auth-card__subtitle">Crie sua conta gratuita em poucos passos</p>
+        </div>
+
+        <form id="register-form" novalidate>
+          <div class="form-group" id="reg-group-name">
+            <label for="reg-name" class="form-label">Nome completo</label>
+            <input type="text" id="reg-name" class="form-input" placeholder="Seu nome completo" required autocomplete="name">
+            <span class="form-error">Por favor, informe seu nome (mínimo 2 caracteres).</span>
+          </div>
+
+          <div class="form-group" id="reg-group-email">
+            <label for="reg-email" class="form-label">E-mail</label>
+            <input type="email" id="reg-email" class="form-input" placeholder="seu@email.com" required autocomplete="email">
+            <span class="form-error">Por favor, informe um e-mail válido.</span>
+          </div>
+
+          <div class="form-group" id="reg-group-birthdate">
+            <label for="reg-birthdate" class="form-label">Data de nascimento</label>
+            <input type="date" id="reg-birthdate" class="form-input" required>
+            <span class="form-error">Por favor, informe sua data de nascimento.</span>
+          </div>
+
+          <div class="form-group" id="reg-group-password">
+            <label for="reg-password" class="form-label">Senha</label>
+            <div class="password-wrapper">
+              <input type="password" id="reg-password" class="form-input" placeholder="Crie uma senha forte" required autocomplete="new-password" minlength="8">
+              <button type="button" class="password-toggle" onclick="togglePassword('reg-password', this)" aria-label="Mostrar senha">👁️</button>
+            </div>
+            <span class="form-error">A senha deve ter no mínimo 8 caracteres.</span>
+            <span class="form-helper">Mínimo de 8 caracteres, com letras e números</span>
+          </div>
+
+          <div class="form-group" id="reg-group-confirm">
+            <label for="reg-confirm" class="form-label">Confirmar senha</label>
+            <div class="password-wrapper">
+              <input type="password" id="reg-confirm" class="form-input" placeholder="Repita a senha" required autocomplete="new-password">
+              <button type="button" class="password-toggle" onclick="togglePassword('reg-confirm', this)" aria-label="Mostrar senha">👁️</button>
+            </div>
+            <span class="form-error">As senhas não coincidem.</span>
+          </div>
+
+          <!-- Indicador de força da senha -->
+          <div id="password-strength" style="margin-bottom:var(--sp-5);display:none;">
+            <div style="display:flex;gap:var(--sp-1);margin-bottom:var(--sp-1);">
+              <div id="str-bar-1" style="flex:1;height:4px;border-radius:2px;background:var(--clr-border);transition:background var(--transition-fast);"></div>
+              <div id="str-bar-2" style="flex:1;height:4px;border-radius:2px;background:var(--clr-border);transition:background var(--transition-fast);"></div>
+              <div id="str-bar-3" style="flex:1;height:4px;border-radius:2px;background:var(--clr-border);transition:background var(--transition-fast);"></div>
+              <div id="str-bar-4" style="flex:1;height:4px;border-radius:2px;background:var(--clr-border);transition:background var(--transition-fast);"></div>
+            </div>
+            <span id="str-text" style="font-size:var(--fs-xs);color:var(--clr-text-muted);"></span>
+          </div>
+
+          <div class="form-group">
+            <label style="display:flex;align-items:flex-start;gap:var(--sp-2);font-size:var(--fs-sm);color:var(--clr-text-secondary);cursor:pointer;">
+              <input type="checkbox" id="reg-terms" required style="width:18px;height:18px;accent-color:var(--clr-primary-500);margin-top:2px;flex-shrink:0;">
+              Li e concordo com os <a href="#" style="font-weight:600;">Termos de Uso</a> e a <a href="#" style="font-weight:600;">Política de Privacidade</a>.
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--large" style="width:100%;">
+            Criar Conta
+          </button>
+        </form>
+
+        <div class="auth-card__footer">
+          Já tem uma conta? <a href="login.html">Fazer login</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ACESSIBILIDADE -->
+  <div class="a11y-widget" aria-label="Opções de acessibilidade">
+    <button class="a11y-widget__toggle" aria-label="Abrir opções de acessibilidade" aria-expanded="false">♿</button>
+    <div class="a11y-widget__panel" role="dialog" aria-label="Painel de acessibilidade">
+      <div class="a11y-widget__title">♿ Acessibilidade</div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Alto Contraste</span>
+        <label class="toggle"><input type="checkbox" id="toggle-high-contrast"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Texto Grande</span>
+        <label class="toggle"><input type="checkbox" id="toggle-large-text"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Reduzir Animações</span>
+        <label class="toggle"><input type="checkbox" id="toggle-reduced-motion"><span class="toggle__slider"></span></label>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    function togglePassword(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🙈';
+        btn.setAttribute('aria-label', 'Ocultar senha');
+      } else {
+        input.type = 'password';
+        btn.textContent = '👁️';
+        btn.setAttribute('aria-label', 'Mostrar senha');
+      }
+    }
+
+    // Indicador de força da senha
+    const regPassword = document.getElementById('reg-password');
+    const strengthDisplay = document.getElementById('password-strength');
+    const strText = document.getElementById('str-text');
+
+    if (regPassword) {
+      regPassword.addEventListener('input', () => {
+        const val = regPassword.value;
+        if (val.length === 0) {
+          strengthDisplay.style.display = 'none';
+          return;
+        }
+        strengthDisplay.style.display = 'block';
+
+        let score = 0;
+        if (val.length >= 8) score++;
+        if (/[a-z]/.test(val) && /[A-Z]/.test(val)) score++;
+        if (/\d/.test(val)) score++;
+        if (/[^a-zA-Z0-9]/.test(val)) score++;
+
+        const colors = ['var(--clr-error)', 'var(--clr-warning)', 'var(--clr-warm-400)', 'var(--clr-success)'];
+        const labels = ['Fraca', 'Regular', 'Boa', 'Forte'];
+
+        for (let i = 1; i <= 4; i++) {
+          const bar = document.getElementById(`str-bar-${i}`);
+          bar.style.background = i <= score ? colors[score - 1] : 'var(--clr-border)';
+        }
+        strText.textContent = `Força: ${labels[score - 1] || 'Muito fraca'}`;
+        strText.style.color = colors[score - 1] || 'var(--clr-text-muted)';
+      });
+    }
+
+    // Validação do cadastro
+    const registerForm = document.getElementById('register-form');
+    if (registerForm) {
+      registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let isValid = true;
+
+        // Nome
+        const name = document.getElementById('reg-name');
+        const gName = document.getElementById('reg-group-name');
+        if (!name.value.trim() || name.value.trim().length < 2) {
+          gName.classList.add('error'); isValid = false;
+        } else { gName.classList.remove('error'); }
+
+        // Email
+        const email = document.getElementById('reg-email');
+        const gEmail = document.getElementById('reg-group-email');
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+          gEmail.classList.add('error'); isValid = false;
+        } else { gEmail.classList.remove('error'); }
+
+        // Data de nascimento
+        const birthdate = document.getElementById('reg-birthdate');
+        const gBirth = document.getElementById('reg-group-birthdate');
+        if (!birthdate.value) {
+          gBirth.classList.add('error'); isValid = false;
+        } else { gBirth.classList.remove('error'); }
+
+        // Senha
+        const password = document.getElementById('reg-password');
+        const gPass = document.getElementById('reg-group-password');
+        if (password.value.length < 8) {
+          gPass.classList.add('error'); isValid = false;
+        } else { gPass.classList.remove('error'); }
+
+        // Confirmar senha
+        const confirm = document.getElementById('reg-confirm');
+        const gConfirm = document.getElementById('reg-group-confirm');
+        if (confirm.value !== password.value || !confirm.value) {
+          gConfirm.classList.add('error'); isValid = false;
+        } else { gConfirm.classList.remove('error'); }
+
+        // Termos
+        const terms = document.getElementById('reg-terms');
+        if (!terms.checked) {
+          isValid = false;
+          showToast('Por favor, aceite os Termos de Uso.', 'warning');
+          return;
+        }
+
+        if (isValid) {
+          const userData = {
+            name: name.value.trim(),
+            email: email.value.trim(),
+            birthdate: birthdate.value,
+            loggedIn: true,
+            registrationDate: new Date().toISOString()
+          };
+          localStorage.setItem('hugtea-user', JSON.stringify(userData));
+
+          showToast('Conta criada com sucesso! Bem-vindo ao HUGTEA! 🎉', 'success', 5000);
+          setTimeout(() => {
+            window.location.href = 'perfil.html';
+          }, 2000);
+        } else {
+          showToast('Por favor, corrija os campos destacados.', 'error');
+        }
+      });
+
+      registerForm.querySelectorAll('input').forEach(field => {
+        field.addEventListener('input', () => {
+          field.closest('.form-group')?.classList.remove('error');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

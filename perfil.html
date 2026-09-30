@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Gerencie seu perfil no HUGTEA — atualize dados, personalize preferências e gerencie sua conta.">
+  <title>Meu Perfil — HUGTEA</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤗</text></svg>">
+</head>
+<body>
+  <div class="loading-overlay" aria-hidden="true"><div class="loading-spinner"></div></div>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <div class="container">
+      <a href="index.html" class="navbar__logo" aria-label="HUGTEA - Ir para página inicial">
+        <div class="navbar__logo-icon">🤗</div>
+        HUGTEA
+      </a>
+      <div class="navbar__links" id="nav-links">
+        <a href="index.html" class="navbar__link">Início</a>
+        <a href="sobre-tea.html" class="navbar__link">Sobre TEA</a>
+        <a href="recursos.html" class="navbar__link">Recursos</a>
+        <a href="contato.html" class="navbar__link">Contato</a>
+        <a href="perfil.html" class="navbar__cta" id="nav-user-btn">Meu Perfil</a>
+      </div>
+      <button class="navbar__hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <div class="container">
+      <div class="profile-layout">
+        <!-- SIDEBAR -->
+        <aside class="profile-sidebar">
+          <div class="card" style="text-align:center;padding:var(--sp-8);">
+            <div class="profile-avatar" id="profile-avatar-display">
+              😊
+            </div>
+            <h2 class="profile-sidebar__name" id="profile-display-name">Usuário</h2>
+            <p class="profile-sidebar__email" id="profile-display-email">usuario@email.com</p>
+
+            <nav aria-label="Menu do perfil" style="margin-top:var(--sp-6);">
+              <a href="#section-personal" class="profile-nav__link active" onclick="switchTab('personal', this)">
+                👤 Dados Pessoais
+              </a>
+              <a href="#section-preferences" class="profile-nav__link" onclick="switchTab('preferences', this)">
+                ⚙️ Preferências
+              </a>
+              <a href="#section-security" class="profile-nav__link" onclick="switchTab('security', this)">
+                🔒 Segurança
+              </a>
+              <a href="#" class="profile-nav__link" onclick="logout()" style="color:var(--clr-error);">
+                🚪 Sair
+              </a>
+            </nav>
+          </div>
+        </aside>
+
+        <!-- CONTEÚDO -->
+        <div class="profile-content">
+          <!-- Dados Pessoais -->
+          <section id="section-personal" class="profile-content__section animate-on-scroll">
+            <h2 class="profile-content__title">👤 Dados Pessoais</h2>
+            <p class="profile-content__description">Atualize suas informações pessoais.</p>
+
+            <form id="profile-form">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);">
+                <div class="form-group">
+                  <label for="profile-name" class="form-label">Nome completo</label>
+                  <input type="text" id="profile-name" class="form-input" placeholder="Seu nome">
+                </div>
+                <div class="form-group">
+                  <label for="profile-email" class="form-label">E-mail</label>
+                  <input type="email" id="profile-email" class="form-input" placeholder="seu@email.com" disabled style="opacity:0.6;">
+                  <span class="form-helper">O e-mail não pode ser alterado</span>
+                </div>
+              </div>
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);">
+                <div class="form-group">
+                  <label for="profile-birthdate" class="form-label">Data de nascimento</label>
+                  <input type="date" id="profile-birthdate" class="form-input">
+                </div>
+                <div class="form-group">
+                  <label for="profile-phone" class="form-label">Telefone (opcional)</label>
+                  <input type="tel" id="profile-phone" class="form-input" placeholder="(00) 00000-0000">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="profile-bio" class="form-label">Sobre mim (opcional)</label>
+                <textarea id="profile-bio" class="form-textarea" placeholder="Conte um pouco sobre você..." style="min-height:100px;"></textarea>
+              </div>
+
+              <!-- Upload de foto -->
+              <div class="form-group">
+                <label class="form-label">Foto de perfil (opcional)</label>
+                <div style="display:flex;align-items:center;gap:var(--sp-4);">
+                  <div id="avatar-preview" style="
+                    width:64px;height:64px;border-radius:var(--radius-full);
+                    background:linear-gradient(135deg,var(--clr-primary-100),var(--clr-secondary-100));
+                    display:flex;align-items:center;justify-content:center;font-size:1.8rem;
+                    overflow:hidden;flex-shrink:0;
+                  ">😊</div>
+                  <div>
+                    <label for="avatar-upload" class="btn btn--secondary" style="cursor:pointer;font-size:var(--fs-sm);">
+                      📷 Escolher foto
+                    </label>
+                    <input type="file" id="avatar-upload" accept="image/*" style="display:none;">
+                    <p class="form-helper" style="margin-top:var(--sp-1);">JPG, PNG ou GIF. Máximo 2MB.</p>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn--primary">Salvar Alterações</button>
+            </form>
+          </section>
+
+          <!-- Preferências -->
+          <section id="section-preferences" class="profile-content__section animate-on-scroll" style="display:none;">
+            <h2 class="profile-content__title">⚙️ Preferências</h2>
+            <p class="profile-content__description">Personalize sua experiência no HUGTEA.</p>
+
+            <div style="border-bottom:1px solid var(--clr-border-light);padding:var(--sp-4) 0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <strong style="font-size:var(--fs-base);">Alto Contraste</strong>
+                  <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);">Aumentar contraste para melhor legibilidade</p>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="pref-high-contrast">
+                  <span class="toggle__slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div style="border-bottom:1px solid var(--clr-border-light);padding:var(--sp-4) 0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <strong style="font-size:var(--fs-base);">Texto Grande</strong>
+                  <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);">Aumentar o tamanho do texto</p>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="pref-large-text">
+                  <span class="toggle__slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div style="border-bottom:1px solid var(--clr-border-light);padding:var(--sp-4) 0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <strong style="font-size:var(--fs-base);">Reduzir Animações</strong>
+                  <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);">Desativar animações e transições</p>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="pref-reduced-motion">
+                  <span class="toggle__slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div style="padding:var(--sp-4) 0;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div>
+                  <strong style="font-size:var(--fs-base);">Notificações por E-mail</strong>
+                  <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);">Receber atualizações e novidades</p>
+                </div>
+                <label class="toggle">
+                  <input type="checkbox" id="pref-notifications" checked>
+                  <span class="toggle__slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <br>
+            <button class="btn btn--primary" onclick="savePreferences()">Salvar Preferências</button>
+          </section>
+
+          <!-- Segurança -->
+          <section id="section-security" class="profile-content__section animate-on-scroll" style="display:none;">
+            <h2 class="profile-content__title">🔒 Segurança</h2>
+            <p class="profile-content__description">Gerencie a segurança da sua conta.</p>
+
+            <form id="password-change-form">
+              <div class="form-group">
+                <label for="current-password" class="form-label">Senha atual</label>
+                <div class="password-wrapper">
+                  <input type="password" id="current-password" class="form-input" placeholder="Sua senha atual">
+                  <button type="button" class="password-toggle" onclick="togglePwd('current-password', this)">👁️</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="new-password" class="form-label">Nova senha</label>
+                <div class="password-wrapper">
+                  <input type="password" id="new-password" class="form-input" placeholder="Crie uma nova senha" minlength="8">
+                  <button type="button" class="password-toggle" onclick="togglePwd('new-password', this)">👁️</button>
+                </div>
+                <span class="form-helper">Mínimo de 8 caracteres</span>
+              </div>
+
+              <div class="form-group">
+                <label for="confirm-new-password" class="form-label">Confirmar nova senha</label>
+                <div class="password-wrapper">
+                  <input type="password" id="confirm-new-password" class="form-input" placeholder="Confirme a nova senha">
+                  <button type="button" class="password-toggle" onclick="togglePwd('confirm-new-password', this)">👁️</button>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn--primary">Alterar Senha</button>
+            </form>
+
+            <hr style="margin:var(--sp-8) 0;border:none;border-top:1px solid var(--clr-border-light);">
+
+            <!-- Exportar Dados (RF-004) -->
+            <h3 style="font-family:var(--font-display);font-weight:700;margin-bottom:var(--sp-2);">📥 Exportar Meus Dados</h3>
+            <p style="font-size:var(--fs-sm);color:var(--clr-text-secondary);margin-bottom:var(--sp-4);">
+              Baixe uma cópia dos seus dados conforme a LGPD.
+            </p>
+            <button class="btn btn--secondary" onclick="exportData()">Exportar Dados (JSON)</button>
+
+            <hr style="margin:var(--sp-8) 0;border:none;border-top:1px solid var(--clr-border-light);">
+
+            <h3 style="font-family:var(--font-display);font-weight:700;color:var(--clr-error);margin-bottom:var(--sp-2);">⚠️ Zona de Perigo</h3>
+            <p style="font-size:var(--fs-sm);color:var(--clr-text-secondary);margin-bottom:var(--sp-4);">
+              Esta ação é irreversível. Todos os seus dados serão permanentemente excluídos.
+            </p>
+            <button class="btn btn--secondary" style="border-color:var(--clr-error);color:var(--clr-error);" onclick="deleteAccount()">
+              Excluir Minha Conta
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ACESSIBILIDADE -->
+  <div class="a11y-widget" aria-label="Opções de acessibilidade">
+    <button class="a11y-widget__toggle" aria-label="Abrir opções de acessibilidade" aria-expanded="false">♿</button>
+    <div class="a11y-widget__panel" role="dialog" aria-label="Painel de acessibilidade">
+      <div class="a11y-widget__title">♿ Acessibilidade</div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Alto Contraste</span>
+        <label class="toggle"><input type="checkbox" id="toggle-high-contrast"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Texto Grande</span>
+        <label class="toggle"><input type="checkbox" id="toggle-large-text"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Reduzir Animações</span>
+        <label class="toggle"><input type="checkbox" id="toggle-reduced-motion"><span class="toggle__slider"></span></label>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // ---- Verificar login ----
+    function checkAuth() {
+      const userData = JSON.parse(localStorage.getItem('hugtea-user') || '{}');
+      if (!userData.loggedIn) {
+        showToast('Você precisa estar logado para acessar esta página.', 'warning');
+        setTimeout(() => window.location.href = 'login.html', 1500);
+        return null;
+      }
+      return userData;
+    }
+
+    // ---- Carregar dados do usuário ----
+    function loadUserData() {
+      const user = checkAuth();
+      if (!user) return;
+
+      document.getElementById('profile-display-name').textContent = user.name || 'Usuário';
+      document.getElementById('profile-display-email').textContent = user.email || '';
+      document.getElementById('profile-name').value = user.name || '';
+      document.getElementById('profile-email').value = user.email || '';
+      document.getElementById('profile-birthdate').value = user.birthdate || '';
+      document.getElementById('profile-phone').value = user.phone || '';
+      document.getElementById('profile-bio').value = user.bio || '';
+
+      // Avatar com iniciais
+      if (user.name) {
+        const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+        document.getElementById('profile-avatar-display').textContent = initials;
+        document.getElementById('avatar-preview').textContent = initials;
+      }
+
+      // Se tiver foto salva
+      if (user.avatarUrl) {
+        document.getElementById('profile-avatar-display').innerHTML = `<img src="${user.avatarUrl}" alt="Foto de perfil" style="width:100%;height:100%;object-fit:cover;">`;
+        document.getElementById('avatar-preview').innerHTML = `<img src="${user.avatarUrl}" alt="Foto de perfil" style="width:100%;height:100%;object-fit:cover;">`;
+      }
+    }
+
+    loadUserData();
+
+    // ---- Tabs ----
+    function switchTab(tabId, link) {
+      document.querySelectorAll('.profile-content__section').forEach(s => s.style.display = 'none');
+      document.querySelectorAll('.profile-nav__link').forEach(l => l.classList.remove('active'));
+      document.getElementById(`section-${tabId}`).style.display = 'block';
+      if (link) link.classList.add('active');
+    }
+
+    // ---- Salvar perfil ----
+    const profileForm = document.getElementById('profile-form');
+    if (profileForm) {
+      profileForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const user = JSON.parse(localStorage.getItem('hugtea-user') || '{}');
+        user.name = document.getElementById('profile-name').value.trim();
+        user.birthdate = document.getElementById('profile-birthdate').value;
+        user.phone = document.getElementById('profile-phone').value;
+        user.bio = document.getElementById('profile-bio').value;
+        localStorage.setItem('hugtea-user', JSON.stringify(user));
+
+        document.getElementById('profile-display-name').textContent = user.name || 'Usuário';
+        if (user.name) {
+          const initials = user.name.split(' ').map(n => n[0]).join('').toUpperCase().substring(0, 2);
+          if (!user.avatarUrl) {
+            document.getElementById('profile-avatar-display').textContent = initials;
+            document.getElementById('avatar-preview').textContent = initials;
+          }
+        }
+
+        showToast('Perfil atualizado com sucesso! ✓', 'success');
+      });
+    }
+
+    // ---- Upload de foto ----
+    const avatarUpload = document.getElementById('avatar-upload');
+    if (avatarUpload) {
+      avatarUpload.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        if (file.size > 2 * 1024 * 1024) {
+          showToast('A foto deve ter no máximo 2MB.', 'error');
+          return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          const imgHtml = `<img src="${event.target.result}" alt="Foto de perfil" style="width:100%;height:100%;object-fit:cover;">`;
+          document.getElementById('profile-avatar-display').innerHTML = imgHtml;
+          document.getElementById('avatar-preview').innerHTML = imgHtml;
+
+          const user = JSON.parse(localStorage.getItem('hugtea-user') || '{}');
+          user.avatarUrl = event.target.result;
+          localStorage.setItem('hugtea-user', JSON.stringify(user));
+
+          showToast('Foto atualizada! ✓', 'success');
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // ---- Alterar senha ----
+    const passwordForm = document.getElementById('password-change-form');
+    if (passwordForm) {
+      passwordForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const newPwd = document.getElementById('new-password').value;
+        const confirmPwd = document.getElementById('confirm-new-password').value;
+
+        if (newPwd.length < 8) {
+          showToast('A nova senha deve ter no mínimo 8 caracteres.', 'error');
+          return;
+        }
+        if (newPwd !== confirmPwd) {
+          showToast('As senhas não coincidem.', 'error');
+          return;
+        }
+
+        showToast('Senha alterada com sucesso! ✓', 'success');
+        passwordForm.reset();
+      });
+    }
+
+    function togglePwd(id, btn) {
+      const input = document.getElementById(id);
+      if (input.type === 'password') {
+        input.type = 'text'; btn.textContent = '🙈';
+      } else {
+        input.type = 'password'; btn.textContent = '👁️';
+      }
+    }
+
+    // ---- Exportar dados (RF-004) ----
+    function exportData() {
+      const user = JSON.parse(localStorage.getItem('hugtea-user') || '{}');
+      const dataStr = JSON.stringify(user, null, 2);
+      const blob = new Blob([dataStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `hugtea-dados-${user.name || 'usuario'}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Dados exportados com sucesso! 📥', 'success');
+    }
+
+    // ---- Logout ----
+    function logout() {
+      localStorage.removeItem('hugtea-user');
+      showToast('Você saiu da sua conta. Até breve! 👋', 'info');
+      setTimeout(() => window.location.href = 'index.html', 1500);
+    }
+
+    // ---- Excluir conta ----
+    function deleteAccount() {
+      if (confirm('Tem certeza que deseja excluir sua conta? Esta ação é irreversível.')) {
+        localStorage.removeItem('hugtea-user');
+        showToast('Conta excluída com sucesso. Sentiremos sua falta. 💜', 'info', 5000);
+        setTimeout(() => window.location.href = 'index.html', 2000);
+      }
+    }
+
+    // ---- Preferências ----
+    function savePreferences() {
+      showToast('Preferências salvas com sucesso! ✓', 'success');
+    }
+
+    // Sincronizar preferências do perfil com o widget global
+    const prefHighContrast = document.getElementById('pref-high-contrast');
+    const prefLargeText = document.getElementById('pref-large-text');
+    const prefReducedMotion = document.getElementById('pref-reduced-motion');
+
+    if (prefHighContrast) {
+      prefHighContrast.checked = localStorage.getItem('hugtea-high-contrast') === 'true';
+      prefHighContrast.addEventListener('change', () => {
+        document.body.classList.toggle('high-contrast', prefHighContrast.checked);
+        localStorage.setItem('hugtea-high-contrast', prefHighContrast.checked);
+        const globalToggle = document.getElementById('toggle-high-contrast');
+        if (globalToggle) globalToggle.checked = prefHighContrast.checked;
+      });
+    }
+    if (prefLargeText) {
+      prefLargeText.checked = localStorage.getItem('hugtea-large-text') === 'true';
+      prefLargeText.addEventListener('change', () => {
+        document.body.classList.toggle('large-text', prefLargeText.checked);
+        localStorage.setItem('hugtea-large-text', prefLargeText.checked);
+        const globalToggle = document.getElementById('toggle-large-text');
+        if (globalToggle) globalToggle.checked = prefLargeText.checked;
+      });
+    }
+    if (prefReducedMotion) {
+      prefReducedMotion.checked = localStorage.getItem('hugtea-reduced-motion') === 'true';
+      prefReducedMotion.addEventListener('change', () => {
+        if (prefReducedMotion.checked) {
+          document.documentElement.style.setProperty('--transition-fast', '0ms');
+          document.documentElement.style.setProperty('--transition-base', '0ms');
+          document.documentElement.style.setProperty('--transition-slow', '0ms');
+        } else {
+          document.documentElement.style.setProperty('--transition-fast', '150ms ease');
+          document.documentElement.style.setProperty('--transition-base', '250ms ease');
+          document.documentElement.style.setProperty('--transition-slow', '400ms ease');
+        }
+        localStorage.setItem('hugtea-reduced-motion', prefReducedMotion.checked);
+        const globalToggle = document.getElementById('toggle-reduced-motion');
+        if (globalToggle) globalToggle.checked = prefReducedMotion.checked;
+      });
+    }
+  </script>
+</body>
+</html>

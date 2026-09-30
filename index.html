@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HUGTEA — Site de acolhimento para pessoas com TEA (Transtorno do Espectro Autista). Informação, recursos e comunidade para promover autonomia e inclusão.">
+  <meta name="keywords" content="TEA, autismo, acolhimento, inclusão, neurodiversidade, recursos, comunidade">
+  <meta name="author" content="Luiza Martins, Laura Alves, Jonathan Correa, Gabriella Ribeiro">
+  <title>HUGTEA — Acolhimento e Inclusão para Pessoas com TEA</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤗</text></svg>">
+</head>
+<body>
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" aria-hidden="true">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Skip Link (Acessibilidade) -->
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- ====== NAVBAR ====== -->
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <div class="container">
+      <a href="index.html" class="navbar__logo" aria-label="HUGTEA - Ir para página inicial">
+        <div class="navbar__logo-icon">🤗</div>
+        HUGTEA
+      </a>
+
+      <div class="navbar__links" id="nav-links" role="menubar">
+        <a href="index.html" class="navbar__link active" role="menuitem">Início</a>
+        <a href="sobre-tea.html" class="navbar__link" role="menuitem">Sobre TEA</a>
+        <a href="recursos.html" class="navbar__link" role="menuitem">Recursos</a>
+        <a href="contato.html" class="navbar__link" role="menuitem">Contato</a>
+        <a href="login.html" class="navbar__cta" role="menuitem">Entrar</a>
+      </div>
+
+      <button class="navbar__hamburger" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="nav-links">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ====== HERO ====== -->
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true">
+        <div class="hero__bg-shape hero__bg-shape--1"></div>
+        <div class="hero__bg-shape hero__bg-shape--2"></div>
+        <div class="hero__bg-shape hero__bg-shape--3"></div>
+      </div>
+
+      <div class="container">
+        <div class="hero__content">
+          <div class="hero__badge">🧩 Acolhimento e Inclusão</div>
+          <h1 class="hero__title" id="hero-title">
+            Um abraço digital para quem é <span>único</span>
+          </h1>
+          <p class="hero__description">
+            O HUGTEA é um espaço seguro e acolhedor criado para pessoas com TEA.
+            Aqui você encontra informações confiáveis, ferramentas adaptadas e uma
+            comunidade que entende você.
+          </p>
+          <div class="hero__actions">
+            <a href="sobre-tea.html" class="btn btn--primary btn--large">
+              Conhecer o TEA
+            </a>
+            <a href="recursos.html" class="btn btn--secondary btn--large">
+              Ver Recursos
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__visual">
+          <div class="hero__illustration">
+            <img src="img/hero.jpg" alt="Ilustração de pessoas diversas se abraçando e se apoiando em uma comunidade acolhedora" loading="eager">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== ESTATÍSTICAS ====== -->
+    <section class="section" aria-label="Estatísticas sobre TEA">
+      <div class="container">
+        <div class="stats animate-on-scroll">
+          <div class="stat">
+            <div class="stat__number">1 em 36</div>
+            <div class="stat__label">crianças são diagnosticadas com TEA</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number">2M+</div>
+            <div class="stat__label">pessoas com TEA no Brasil</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number">70%</div>
+            <div class="stat__label">podem ter vida independente com apoio</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number">∞</div>
+            <div class="stat__label">formas de ser único</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== O QUE FAZEMOS ====== -->
+    <section class="section section--alt" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <div class="section__badge">✨ O que oferecemos</div>
+          <h2 class="section__title" id="features-title">Tudo pensado para você</h2>
+          <p class="section__subtitle">
+            Cada detalhe do HUGTEA foi projetado para ser acessível, confortável e
+            respeitoso com as necessidades de pessoas no espectro autista.
+          </p>
+        </div>
+
+        <div class="grid grid--3">
+          <div class="card animate-on-scroll">
+            <div class="card__icon card__icon--purple">📚</div>
+            <h3 class="card__title">Informação Confiável</h3>
+            <p class="card__text">
+              Conteúdos atualizados e verificados sobre TEA, escritos de forma clara
+              e acessível para todos.
+            </p>
+          </div>
+
+          <div class="card animate-on-scroll">
+            <div class="card__icon card__icon--teal">🛠️</div>
+            <h3 class="card__title">Ferramentas Adaptadas</h3>
+            <p class="card__text">
+              Recursos pensados para ajudar na rotina diária, organização e bem-estar
+              emocional.
+            </p>
+          </div>
+
+          <div class="card animate-on-scroll">
+            <div class="card__icon card__icon--pink">💜</div>
+            <h3 class="card__title">Comunidade Acolhedora</h3>
+            <p class="card__text">
+              Um espaço onde você é ouvido, respeitado e acolhido. Sem julgamentos,
+              apenas apoio.
+            </p>
+          </div>
+
+          <div class="card animate-on-scroll">
+            <div class="card__icon card__icon--warm">♿</div>
+            <h3 class="card__title">Acessibilidade Total</h3>
+            <p class="card__text">
+              Interface adaptável com alto contraste, texto grande e opção de reduzir
+              animações.
+            </p>
+          </div>
+
+          <div class="card animate-on-scroll">
+            <div class="card__icon card__icon--purple">🔒</div>
+            <h3 class="card__title">Seguro e Privado</h3>
+            <p class="card__text">
+              Seus dados são protegidos com as melhores práticas de segurança, em
+              conformidade com a LGPD.
+            </p>
+          </div>
+
+          <div class="card animate-on-scroll">
+            <div class="card__icon card__icon--teal">📧</div>
+            <h3 class="card__title">Suporte Humanizado</h3>
+            <p class="card__text">
+              Atendimento via e-mail com respostas pensadas e escritas por pessoas
+              que entendem suas necessidades.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== SOBRE NÓS (preview) ====== -->
+    <section class="section" aria-labelledby="about-title">
+      <div class="container">
+        <div class="info-block animate-on-scroll">
+          <div class="info-block__image">
+            <img src="img/about-tea.jpg" alt="Ilustração de ambiente sensorial acolhedor com pessoas em atividades calmas">
+          </div>
+          <div>
+            <div class="section__badge">🧠 Entendendo o TEA</div>
+            <h2 class="section__title" id="about-title" style="text-align:left;">
+              O que é o Transtorno do Espectro Autista?
+            </h2>
+            <p class="section__subtitle" style="text-align:left;">
+              O TEA é uma condição neurológica que afeta a forma como uma pessoa percebe
+              o mundo e interage com as outras. Não é uma doença — é uma forma diferente
+              e igualmente válida de existir.
+            </p>
+            <br>
+            <div class="feature-list">
+              <div class="feature-item">
+                <div class="feature-item__icon">✓</div>
+                <span class="feature-item__text">Cada pessoa com TEA é única</span>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item__icon">✓</div>
+                <span class="feature-item__text">Diagnóstico pode ocorrer em qualquer idade</span>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item__icon">✓</div>
+                <span class="feature-item__text">Apoio adequado faz toda a diferença</span>
+              </div>
+              <div class="feature-item">
+                <div class="feature-item__icon">✓</div>
+                <span class="feature-item__text">Neurodiversidade é riqueza</span>
+              </div>
+            </div>
+            <br>
+            <a href="sobre-tea.html" class="btn btn--primary">Saiba Mais sobre TEA</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== CTA ====== -->
+    <section class="section section--alt" aria-labelledby="cta-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <div class="section__badge">🤝 Faça parte</div>
+          <h2 class="section__title" id="cta-title">Junte-se ao HUGTEA</h2>
+          <p class="section__subtitle">
+            Crie sua conta gratuitamente e tenha acesso a ferramentas personalizadas,
+            conteúdos exclusivos e uma experiência adaptada às suas necessidades.
+          </p>
+          <br>
+          <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+            <a href="cadastro.html" class="btn btn--primary btn--large">Criar Conta Gratuita</a>
+            <a href="contato.html" class="btn btn--secondary btn--large">Fale Conosco</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="navbar__logo" style="color: white;">
+            <div class="navbar__logo-icon">🤗</div>
+            HUGTEA
+          </a>
+          <p class="footer__brand-text">
+            Um espaço digital de acolhimento para pessoas com Transtorno do
+            Espectro Autista. Promovendo autonomia, inclusão e bem-estar.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="footer__title">Navegação</h3>
+          <a href="index.html" class="footer__link">Início</a>
+          <a href="sobre-tea.html" class="footer__link">Sobre TEA</a>
+          <a href="recursos.html" class="footer__link">Recursos</a>
+          <a href="contato.html" class="footer__link">Contato</a>
+        </div>
+
+        <div>
+          <h3 class="footer__title">Conta</h3>
+          <a href="login.html" class="footer__link">Entrar</a>
+          <a href="cadastro.html" class="footer__link">Criar Conta</a>
+          <a href="perfil.html" class="footer__link">Meu Perfil</a>
+        </div>
+
+        <div>
+          <h3 class="footer__title">Suporte</h3>
+          <a href="contato.html" class="footer__link">Fale Conosco</a>
+          <a href="#" class="footer__link">Privacidade</a>
+          <a href="#" class="footer__link">Termos de Uso</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">
+          © 2026 HUGTEA — Feito com 💜 por Luiza, Laura, Jonathan e Gabriella
+        </p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="footer__social-link" aria-label="YouTube">▶</a>
+          <a href="#" class="footer__social-link" aria-label="E-mail">✉</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ====== WIDGET DE ACESSIBILIDADE ====== -->
+  <div class="a11y-widget" aria-label="Opções de acessibilidade">
+    <button class="a11y-widget__toggle" aria-label="Abrir opções de acessibilidade" aria-expanded="false">
+      ♿
+    </button>
+    <div class="a11y-widget__panel" role="dialog" aria-label="Painel de acessibilidade">
+      <div class="a11y-widget__title">♿ Acessibilidade</div>
+
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Alto Contraste</span>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-high-contrast">
+          <span class="toggle__slider"></span>
+        </label>
+      </div>
+
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Texto Grande</span>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-large-text">
+          <span class="toggle__slider"></span>
+        </label>
+      </div>
+
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Reduzir Animações</span>
+        <label class="toggle">
+          <input type="checkbox" id="toggle-reduced-motion">
+          <span class="toggle__slider"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

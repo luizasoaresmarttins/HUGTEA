@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Faça login na sua conta HUGTEA para acessar funcionalidades personalizadas.">
+  <title>Entrar — HUGTEA</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤗</text></svg>">
+</head>
+<body>
+  <div class="loading-overlay" aria-hidden="true"><div class="loading-spinner"></div></div>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <div class="container">
+      <a href="index.html" class="navbar__logo" aria-label="HUGTEA - Ir para página inicial">
+        <div class="navbar__logo-icon">🤗</div>
+        HUGTEA
+      </a>
+      <div class="navbar__links" id="nav-links">
+        <a href="index.html" class="navbar__link">Início</a>
+        <a href="sobre-tea.html" class="navbar__link">Sobre TEA</a>
+        <a href="recursos.html" class="navbar__link">Recursos</a>
+        <a href="contato.html" class="navbar__link">Contato</a>
+        <a href="login.html" class="navbar__cta active">Entrar</a>
+      </div>
+      <button class="navbar__hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <div class="auth-page">
+      <div class="auth-card animate-on-scroll">
+        <div class="auth-card__header">
+          <div class="auth-card__logo">🤗</div>
+          <h1 class="auth-card__title">Bem-vindo de volta!</h1>
+          <p class="auth-card__subtitle">Entre na sua conta para continuar</p>
+        </div>
+
+        <form id="login-form" novalidate>
+          <div class="form-group" id="login-group-email">
+            <label for="login-email" class="form-label">E-mail</label>
+            <input
+              type="email"
+              id="login-email"
+              class="form-input"
+              placeholder="seu@email.com"
+              required
+              autocomplete="email"
+            >
+            <span class="form-error">Por favor, informe um e-mail válido.</span>
+          </div>
+
+          <div class="form-group" id="login-group-password">
+            <label for="login-password" class="form-label">Senha</label>
+            <div class="password-wrapper">
+              <input
+                type="password"
+                id="login-password"
+                class="form-input"
+                placeholder="Sua senha"
+                required
+                autocomplete="current-password"
+              >
+              <button type="button" class="password-toggle" onclick="togglePassword('login-password', this)" aria-label="Mostrar senha">
+                👁️
+              </button>
+            </div>
+            <span class="form-error">Por favor, informe sua senha.</span>
+          </div>
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-6);">
+            <label style="display:flex;align-items:center;gap:var(--sp-2);font-size:var(--fs-sm);color:var(--clr-text-secondary);cursor:pointer;">
+              <input type="checkbox" id="login-remember" style="width:16px;height:16px;accent-color:var(--clr-primary-500);">
+              Lembrar de mim
+            </label>
+            <a href="#" style="font-size:var(--fs-sm);font-weight:600;color:var(--clr-primary-600);">Esqueceu a senha?</a>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--large" style="width:100%;">
+            Entrar
+          </button>
+        </form>
+
+        <div class="auth-card__footer">
+          Não tem uma conta? <a href="cadastro.html">Criar conta gratuita</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ACESSIBILIDADE -->
+  <div class="a11y-widget" aria-label="Opções de acessibilidade">
+    <button class="a11y-widget__toggle" aria-label="Abrir opções de acessibilidade" aria-expanded="false">♿</button>
+    <div class="a11y-widget__panel" role="dialog" aria-label="Painel de acessibilidade">
+      <div class="a11y-widget__title">♿ Acessibilidade</div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Alto Contraste</span>
+        <label class="toggle"><input type="checkbox" id="toggle-high-contrast"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Texto Grande</span>
+        <label class="toggle"><input type="checkbox" id="toggle-large-text"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Reduzir Animações</span>
+        <label class="toggle"><input type="checkbox" id="toggle-reduced-motion"><span class="toggle__slider"></span></label>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Toggle Password Visibility
+    function togglePassword(inputId, btn) {
+      const input = document.getElementById(inputId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        btn.textContent = '🙈';
+        btn.setAttribute('aria-label', 'Ocultar senha');
+      } else {
+        input.type = 'password';
+        btn.textContent = '👁️';
+        btn.setAttribute('aria-label', 'Mostrar senha');
+      }
+    }
+
+    // Login Form Validation
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let isValid = true;
+
+        const email = document.getElementById('login-email');
+        const groupEmail = document.getElementById('login-group-email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value.trim())) {
+          groupEmail.classList.add('error');
+          isValid = false;
+        } else {
+          groupEmail.classList.remove('error');
+        }
+
+        const password = document.getElementById('login-password');
+        const groupPassword = document.getElementById('login-group-password');
+        if (!password.value || password.value.length < 6) {
+          groupPassword.classList.add('error');
+          isValid = false;
+        } else {
+          groupPassword.classList.remove('error');
+        }
+
+        if (isValid) {
+          // Simular login: salvar dados no localStorage
+          const userData = {
+            email: email.value.trim(),
+            name: email.value.split('@')[0],
+            loggedIn: true,
+            loginDate: new Date().toISOString()
+          };
+          localStorage.setItem('hugtea-user', JSON.stringify(userData));
+
+          showToast('Login realizado com sucesso! Redirecionando... 🎉', 'success');
+          setTimeout(() => {
+            window.location.href = 'perfil.html';
+          }, 1500);
+        } else {
+          showToast('Por favor, corrija os campos destacados.', 'error');
+        }
+      });
+
+      loginForm.querySelectorAll('input').forEach(field => {
+        field.addEventListener('input', () => {
+          field.closest('.form-group')?.classList.remove('error');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

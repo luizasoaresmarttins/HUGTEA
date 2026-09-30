@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Entre em contato com a equipe HUGTEA. Envie feedbacks, sugestões ou tire dúvidas sobre TEA.">
+  <title>Contato — HUGTEA</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤗</text></svg>">
+</head>
+<body>
+  <div class="loading-overlay" aria-hidden="true"><div class="loading-spinner"></div></div>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <div class="container">
+      <a href="index.html" class="navbar__logo" aria-label="HUGTEA - Ir para página inicial">
+        <div class="navbar__logo-icon">🤗</div>
+        HUGTEA
+      </a>
+      <div class="navbar__links" id="nav-links">
+        <a href="index.html" class="navbar__link">Início</a>
+        <a href="sobre-tea.html" class="navbar__link">Sobre TEA</a>
+        <a href="recursos.html" class="navbar__link">Recursos</a>
+        <a href="contato.html" class="navbar__link active">Contato</a>
+        <a href="login.html" class="navbar__cta">Entrar</a>
+      </div>
+      <button class="navbar__hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <!-- PAGE HEADER -->
+    <section class="page-header" aria-labelledby="page-title">
+      <div class="container">
+        <h1 class="page-header__title" id="page-title">Fale Conosco</h1>
+        <p class="page-header__subtitle">
+          Sua opinião é importante. Envie feedbacks, sugestões ou tire dúvidas.
+        </p>
+      </div>
+    </section>
+
+    <!-- CONTATO -->
+    <section class="section">
+      <div class="container">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-12);align-items:start;">
+
+          <!-- Formulário -->
+          <div class="animate-on-scroll">
+            <div class="card" style="padding:var(--sp-10);">
+              <h2 style="font-family:var(--font-display);font-size:var(--fs-2xl);font-weight:700;margin-bottom:var(--sp-2);">
+                Envie sua mensagem
+              </h2>
+              <p style="font-size:var(--fs-sm);color:var(--clr-text-secondary);margin-bottom:var(--sp-6);">
+                Preencha o formulário abaixo e nossa equipe responderá em até 48 horas úteis.
+              </p>
+
+              <form id="contact-form" novalidate>
+                <div class="form-group" id="group-name">
+                  <label for="contact-name" class="form-label">Nome completo</label>
+                  <input type="text" id="contact-name" class="form-input" placeholder="Seu nome" required autocomplete="name">
+                  <span class="form-error">Por favor, informe seu nome.</span>
+                </div>
+
+                <div class="form-group" id="group-email">
+                  <label for="contact-email" class="form-label">E-mail</label>
+                  <input type="email" id="contact-email" class="form-input" placeholder="seu@email.com" required autocomplete="email">
+                  <span class="form-error">Por favor, informe um e-mail válido.</span>
+                </div>
+
+                <div class="form-group" id="group-subject">
+                  <label for="contact-subject" class="form-label">Assunto</label>
+                  <select id="contact-subject" class="form-select" required>
+                    <option value="">Selecione um assunto</option>
+                    <option value="feedback">Feedback sobre o site</option>
+                    <option value="sugestao">Sugestão de conteúdo</option>
+                    <option value="duvida">Dúvida sobre TEA</option>
+                    <option value="problema">Reportar um problema</option>
+                    <option value="outro">Outro assunto</option>
+                  </select>
+                  <span class="form-error">Por favor, selecione um assunto.</span>
+                </div>
+
+                <div class="form-group" id="group-message">
+                  <label for="contact-message" class="form-label">Mensagem</label>
+                  <textarea id="contact-message" class="form-textarea" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                  <span class="form-error">Por favor, escreva sua mensagem.</span>
+                  <span class="form-helper">Mínimo de 10 caracteres</span>
+                </div>
+
+                <div class="form-group">
+                  <label style="display:flex;align-items:center;gap:var(--sp-2);font-size:var(--fs-sm);color:var(--clr-text-secondary);cursor:pointer;">
+                    <input type="checkbox" id="contact-consent" required style="width:18px;height:18px;accent-color:var(--clr-primary-500);">
+                    Concordo com a <a href="#" style="font-weight:600;">Política de Privacidade</a> e autorizo o uso dos meus dados para resposta.
+                  </label>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--large" style="width:100%;">
+                  📧 Enviar Mensagem
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Info lateral -->
+          <div class="animate-on-scroll">
+            <!-- Canais -->
+            <div class="card" style="margin-bottom:var(--sp-6);">
+              <div class="card__icon card__icon--teal">📧</div>
+              <h3 class="card__title">E-mail</h3>
+              <p class="card__text">
+                Envie diretamente para<br>
+                <a href="mailto:contato@hugtea.com.br" style="font-weight:600;">contato@hugtea.com.br</a>
+              </p>
+            </div>
+
+            <div class="card" style="margin-bottom:var(--sp-6);">
+              <div class="card__icon card__icon--purple">⏰</div>
+              <h3 class="card__title">Horário de Atendimento</h3>
+              <p class="card__text">
+                Segunda a Sexta<br>
+                <strong>8h às 17h</strong> (horário de Brasília)
+              </p>
+            </div>
+
+            <div class="card" style="margin-bottom:var(--sp-6);">
+              <div class="card__icon card__icon--pink">💜</div>
+              <h3 class="card__title">Atendimento Humanizado</h3>
+              <p class="card__text">
+                Todas as mensagens são lidas e respondidas por uma pessoa da nossa equipe.
+                Não usamos respostas automáticas.
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="card__icon card__icon--warm">🔒</div>
+              <h3 class="card__title">Privacidade</h3>
+              <p class="card__text">
+                Seus dados são protegidos conforme a LGPD. Não compartilhamos
+                informações com terceiros.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--alt" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <div class="section__badge">❓ Perguntas Frequentes</div>
+          <h2 class="section__title" id="faq-title">Dúvidas Comuns</h2>
+        </div>
+
+        <div style="max-width:800px;margin:0 auto;" class="animate-on-scroll">
+          <details class="card" style="margin-bottom:var(--sp-4);cursor:pointer;">
+            <summary style="font-family:var(--font-display);font-weight:700;font-size:var(--fs-md);padding:var(--sp-2) 0;">
+              O HUGTEA é gratuito?
+            </summary>
+            <p style="margin-top:var(--sp-3);color:var(--clr-text-secondary);line-height:1.8;">
+              Sim! O HUGTEA é 100% gratuito. Nosso objetivo é oferecer acesso à informação
+              e ferramentas para todas as pessoas, sem nenhum custo.
+            </p>
+          </details>
+
+          <details class="card" style="margin-bottom:var(--sp-4);cursor:pointer;">
+            <summary style="font-family:var(--font-display);font-weight:700;font-size:var(--fs-md);padding:var(--sp-2) 0;">
+              Preciso criar uma conta para usar o site?
+            </summary>
+            <p style="margin-top:var(--sp-3);color:var(--clr-text-secondary);line-height:1.8;">
+              Não. Você pode navegar por todo o conteúdo sem criar conta. O cadastro é
+              opcional e oferece funcionalidades extras como personalização de perfil.
+            </p>
+          </details>
+
+          <details class="card" style="margin-bottom:var(--sp-4);cursor:pointer;">
+            <summary style="font-family:var(--font-display);font-weight:700;font-size:var(--fs-md);padding:var(--sp-2) 0;">
+              Como posso contribuir com o projeto?
+            </summary>
+            <p style="margin-top:var(--sp-3);color:var(--clr-text-secondary);line-height:1.8;">
+              Você pode contribuir enviando feedbacks, sugestões de conteúdo ou reportando
+              problemas pelo formulário acima. Toda contribuição é muito valiosa!
+            </p>
+          </details>
+
+          <details class="card" style="margin-bottom:var(--sp-4);cursor:pointer;">
+            <summary style="font-family:var(--font-display);font-weight:700;font-size:var(--fs-md);padding:var(--sp-2) 0;">
+              O conteúdo é revisado por profissionais?
+            </summary>
+            <p style="margin-top:var(--sp-3);color:var(--clr-text-secondary);line-height:1.8;">
+              Sim. Todo conteúdo publicado no HUGTEA é pesquisado em fontes confiáveis
+              e revisado pela equipe antes da publicação. Não publicamos informações
+              sem verificação.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="navbar__logo" style="color:white;">
+            <div class="navbar__logo-icon">🤗</div> HUGTEA
+          </a>
+          <p class="footer__brand-text">Um espaço digital de acolhimento para pessoas com TEA.</p>
+        </div>
+        <div>
+          <h3 class="footer__title">Navegação</h3>
+          <a href="index.html" class="footer__link">Início</a>
+          <a href="sobre-tea.html" class="footer__link">Sobre TEA</a>
+          <a href="recursos.html" class="footer__link">Recursos</a>
+          <a href="contato.html" class="footer__link">Contato</a>
+        </div>
+        <div>
+          <h3 class="footer__title">Conta</h3>
+          <a href="login.html" class="footer__link">Entrar</a>
+          <a href="cadastro.html" class="footer__link">Criar Conta</a>
+          <a href="perfil.html" class="footer__link">Meu Perfil</a>
+        </div>
+        <div>
+          <h3 class="footer__title">Suporte</h3>
+          <a href="contato.html" class="footer__link">Fale Conosco</a>
+          <a href="#" class="footer__link">Privacidade</a>
+          <a href="#" class="footer__link">Termos de Uso</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2026 HUGTEA — Feito com 💜 por Luiza, Laura, Jonathan e Gabriella</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="footer__social-link" aria-label="YouTube">▶</a>
+          <a href="#" class="footer__social-link" aria-label="E-mail">✉</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ACESSIBILIDADE -->
+  <div class="a11y-widget" aria-label="Opções de acessibilidade">
+    <button class="a11y-widget__toggle" aria-label="Abrir opções de acessibilidade" aria-expanded="false">♿</button>
+    <div class="a11y-widget__panel" role="dialog" aria-label="Painel de acessibilidade">
+      <div class="a11y-widget__title">♿ Acessibilidade</div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Alto Contraste</span>
+        <label class="toggle"><input type="checkbox" id="toggle-high-contrast"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Texto Grande</span>
+        <label class="toggle"><input type="checkbox" id="toggle-large-text"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Reduzir Animações</span>
+        <label class="toggle"><input type="checkbox" id="toggle-reduced-motion"><span class="toggle__slider"></span></label>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Validação do Formulário de Contato
+    const contactForm = document.getElementById('contact-form');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let isValid = true;
+
+        // Validar nome
+        const name = document.getElementById('contact-name');
+        const groupName = document.getElementById('group-name');
+        if (!name.value.trim() || name.value.trim().length < 2) {
+          groupName.classList.add('error');
+          isValid = false;
+        } else {
+          groupName.classList.remove('error');
+        }
+
+        // Validar e-mail
+        const email = document.getElementById('contact-email');
+        const groupEmail = document.getElementById('group-email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value.trim())) {
+          groupEmail.classList.add('error');
+          isValid = false;
+        } else {
+          groupEmail.classList.remove('error');
+        }
+
+        // Validar assunto
+        const subject = document.getElementById('contact-subject');
+        const groupSubject = document.getElementById('group-subject');
+        if (!subject.value) {
+          groupSubject.classList.add('error');
+          isValid = false;
+        } else {
+          groupSubject.classList.remove('error');
+        }
+
+        // Validar mensagem
+        const message = document.getElementById('contact-message');
+        const groupMessage = document.getElementById('group-message');
+        if (!message.value.trim() || message.value.trim().length < 10) {
+          groupMessage.classList.add('error');
+          isValid = false;
+        } else {
+          groupMessage.classList.remove('error');
+        }
+
+        // Validar consentimento
+        const consent = document.getElementById('contact-consent');
+        if (!consent.checked) {
+          isValid = false;
+          showToast('Por favor, aceite a Política de Privacidade.', 'warning');
+          return;
+        }
+
+        if (isValid) {
+          showToast('Mensagem enviada com sucesso! Responderemos em breve. 💜', 'success', 5000);
+          contactForm.reset();
+        } else {
+          showToast('Por favor, corrija os campos destacados.', 'error');
+        }
+      });
+
+      // Limpar erros ao digitar
+      contactForm.querySelectorAll('input, textarea, select').forEach(field => {
+        field.addEventListener('input', () => {
+          field.closest('.form-group')?.classList.remove('error');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

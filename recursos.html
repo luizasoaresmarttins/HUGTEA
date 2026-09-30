@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Recursos e ferramentas acessíveis para pessoas com TEA — rotina, bem-estar, organização e apoio emocional.">
+  <title>Recursos e Ferramentas — HUGTEA</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤗</text></svg>">
+</head>
+<body>
+  <div class="loading-overlay" aria-hidden="true"><div class="loading-spinner"></div></div>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <div class="container">
+      <a href="index.html" class="navbar__logo" aria-label="HUGTEA - Ir para página inicial">
+        <div class="navbar__logo-icon">🤗</div>
+        HUGTEA
+      </a>
+      <div class="navbar__links" id="nav-links">
+        <a href="index.html" class="navbar__link">Início</a>
+        <a href="sobre-tea.html" class="navbar__link">Sobre TEA</a>
+        <a href="recursos.html" class="navbar__link active">Recursos</a>
+        <a href="contato.html" class="navbar__link">Contato</a>
+        <a href="login.html" class="navbar__cta">Entrar</a>
+      </div>
+      <button class="navbar__hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <!-- PAGE HEADER -->
+    <section class="page-header" aria-labelledby="page-title">
+      <div class="container">
+        <h1 class="page-header__title" id="page-title">Recursos e Ferramentas</h1>
+        <p class="page-header__subtitle">
+          Ferramentas práticas para ajudar no dia a dia de pessoas com TEA
+        </p>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="section" aria-labelledby="intro-resources">
+      <div class="container">
+        <div class="info-block animate-on-scroll">
+          <div class="info-block__image">
+            <img src="img/resources.jpg" alt="Pessoa usando ferramentas digitais acessíveis para organização e bem-estar">
+          </div>
+          <div>
+            <div class="section__badge">🛠️ Para você</div>
+            <h2 id="intro-resources" style="font-size:var(--fs-3xl);font-weight:800;margin-bottom:var(--sp-4);font-family:var(--font-display);">
+              Ferramentas pensadas com carinho
+            </h2>
+            <p style="color:var(--clr-text-secondary);line-height:1.8;margin-bottom:var(--sp-4);">
+              Reunimos recursos que podem ajudar na organização da rotina, manejo
+              emocional e habilidades sociais. Tudo pensado para ser simples,
+              intuitivo e respeitoso com suas necessidades.
+            </p>
+            <p style="color:var(--clr-text-secondary);line-height:1.8;">
+              Estes recursos são sugestões e não substituem acompanhamento profissional.
+              Consulte sempre seu médico ou terapeuta.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIAS DE RECURSOS -->
+    <section class="section section--alt" aria-labelledby="categories-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <div class="section__badge">📂 Categorias</div>
+          <h2 class="section__title" id="categories-title">Explore por área</h2>
+        </div>
+
+        <div class="grid grid--3">
+          <!-- Rotina -->
+          <div class="card animate-on-scroll">
+            <div class="card__icon card__icon--purple">📅</div>
+            <h3 class="card__title">Organização e Rotina</h3>
+            <p class="card__text" style="margin-bottom:var(--sp-4);">
+              Ferramentas para criar rotinas visuais, listas de tarefas e lembretes
+              que ajudam a manter o dia previsível e confortável.
+            </p>
+            <ul style="list-style:none;padding:0;">
+              <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
+                <span>📌</span> Quadro visual de rotina diária
+              </li>
+              <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
+                <span>⏰</span> Timer visual para atividades
+              </li>
+              <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);display:flex;gap:var(--sp-2);">
+                <span>✅</span> Lista de tarefas adaptada
+              </li>
+            </ul>
+          </div>
+
+          <!-- Bem-estar -->
+          <div class="card animate-on-scroll">
+            <div class="card__icon card__icon--teal">🧘</div>
+            <h3 class="card__title">Bem-estar Emocional</h3>
+            <p class="card__text" style="margin-bottom:var(--sp-4);">
+              Recursos para ajudar na regulação emocional, redução de ansiedade
+              e momentos de descompressão sensorial.
+            </p>
+            <ul style="list-style:none;padding:0;">
+              <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
+                <span>🫁</span> Exercícios de respiração guiada
+              </li>
+              <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
+                <span>😊</span> Termômetro de emoções
+              </li>
+              <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);display:flex;gap:var(--sp-2);">
+                <span>🎵</span> Sons relaxantes e ambientes calmos
+              </li>
+            </ul>
+          </div>
+
+          <!-- Social -->
+          <div class="card animate-on-scroll">
+            <div class="card__icon card__icon--pink">🤝</div>
+            <h3 class="card__title">Habilidades Sociais</h3>
+            <p class="card__text" style="margin-bottom:var(--sp-4);">
+              Guias visuais e dicas práticas para situações sociais do dia a dia,
+              escritos de forma clara e direta.
+            </p>
+            <ul style="list-style:none;padding:0;">
+              <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
+                <span>👋</span> Guia: como iniciar uma conversa
+              </li>
+              <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
+                <span>🎭</span> Entendendo expressões faciais
+              </li>
+              <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);display:flex;gap:var(--sp-2);">
+                <span>📱</span> Dicas para comunicação online
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FERRAMENTA INTERATIVA: Respiração -->
+    <section class="section" aria-labelledby="breathing-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <div class="section__badge">🫁 Ferramenta Interativa</div>
+          <h2 class="section__title" id="breathing-title">Exercício de Respiração</h2>
+          <p class="section__subtitle">
+            Um exercício simples de respiração para momentos de ansiedade ou sobrecarga sensorial.
+          </p>
+        </div>
+
+        <div class="animate-on-scroll" style="max-width:400px;margin:0 auto;text-align:center;">
+          <div id="breathing-circle" style="
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--clr-primary-200), var(--clr-secondary-200));
+            margin: 0 auto var(--sp-6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: var(--fs-xl);
+            font-weight: 700;
+            color: var(--clr-primary-700);
+            transition: transform 4s ease-in-out;
+            box-shadow: var(--shadow-lg);
+          ">
+            Respire
+          </div>
+          <button id="start-breathing" class="btn btn--primary btn--large" onclick="startBreathing()">
+            Iniciar Exercício
+          </button>
+          <p style="margin-top:var(--sp-4);font-size:var(--fs-sm);color:var(--clr-text-muted);">
+            Inspire por 4 segundos → Segure por 4 segundos → Expire por 4 segundos
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LINKS ÚTEIS -->
+    <section class="section section--alt" aria-labelledby="links-title">
+      <div class="container">
+        <div class="section__header animate-on-scroll">
+          <div class="section__badge">🔗 Links Úteis</div>
+          <h2 class="section__title" id="links-title">Referências Confiáveis</h2>
+          <p class="section__subtitle">
+            Sites e organizações de referência sobre TEA no Brasil e no mundo.
+          </p>
+        </div>
+
+        <div class="grid grid--2">
+          <a href="https://www.gov.br/saude/pt-br" target="_blank" rel="noopener noreferrer" class="card animate-on-scroll" style="text-decoration:none;cursor:pointer;">
+            <div class="card__icon card__icon--teal">🏛️</div>
+            <h3 class="card__title">Ministério da Saúde</h3>
+            <p class="card__text">Informações oficiais sobre políticas de saúde para pessoas com TEA.</p>
+          </a>
+
+          <a href="https://www.autismspeaks.org/" target="_blank" rel="noopener noreferrer" class="card animate-on-scroll" style="text-decoration:none;cursor:pointer;">
+            <div class="card__icon card__icon--purple">🧩</div>
+            <h3 class="card__title">Autism Speaks</h3>
+            <p class="card__text">Organização internacional com pesquisas e recursos sobre autismo.</p>
+          </a>
+
+          <a href="https://abraca.autismobrasil.org/" target="_blank" rel="noopener noreferrer" class="card animate-on-scroll" style="text-decoration:none;cursor:pointer;">
+            <div class="card__icon card__icon--pink">💜</div>
+            <h3 class="card__title">ABRAÇA</h3>
+            <p class="card__text">Associação Brasileira para Ação por Direitos das Pessoas Autistas.</p>
+          </a>
+
+          <a href="https://www.canalautismo.com.br/" target="_blank" rel="noopener noreferrer" class="card animate-on-scroll" style="text-decoration:none;cursor:pointer;">
+            <div class="card__icon card__icon--warm">📺</div>
+            <h3 class="card__title">Canal Autismo</h3>
+            <p class="card__text">Portal de notícias e informações sobre o espectro autista.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="navbar__logo" style="color:white;">
+            <div class="navbar__logo-icon">🤗</div> HUGTEA
+          </a>
+          <p class="footer__brand-text">Um espaço digital de acolhimento para pessoas com TEA.</p>
+        </div>
+        <div>
+          <h3 class="footer__title">Navegação</h3>
+          <a href="index.html" class="footer__link">Início</a>
+          <a href="sobre-tea.html" class="footer__link">Sobre TEA</a>
+          <a href="recursos.html" class="footer__link">Recursos</a>
+          <a href="contato.html" class="footer__link">Contato</a>
+        </div>
+        <div>
+          <h3 class="footer__title">Conta</h3>
+          <a href="login.html" class="footer__link">Entrar</a>
+          <a href="cadastro.html" class="footer__link">Criar Conta</a>
+          <a href="perfil.html" class="footer__link">Meu Perfil</a>
+        </div>
+        <div>
+          <h3 class="footer__title">Suporte</h3>
+          <a href="contato.html" class="footer__link">Fale Conosco</a>
+          <a href="#" class="footer__link">Privacidade</a>
+          <a href="#" class="footer__link">Termos de Uso</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2026 HUGTEA — Feito com 💜 por Luiza, Laura, Jonathan e Gabriella</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="footer__social-link" aria-label="YouTube">▶</a>
+          <a href="#" class="footer__social-link" aria-label="E-mail">✉</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ACESSIBILIDADE -->
+  <div class="a11y-widget" aria-label="Opções de acessibilidade">
+    <button class="a11y-widget__toggle" aria-label="Abrir opções de acessibilidade" aria-expanded="false">♿</button>
+    <div class="a11y-widget__panel" role="dialog" aria-label="Painel de acessibilidade">
+      <div class="a11y-widget__title">♿ Acessibilidade</div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Alto Contraste</span>
+        <label class="toggle"><input type="checkbox" id="toggle-high-contrast"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Texto Grande</span>
+        <label class="toggle"><input type="checkbox" id="toggle-large-text"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Reduzir Animações</span>
+        <label class="toggle"><input type="checkbox" id="toggle-reduced-motion"><span class="toggle__slider"></span></label>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Exercício de Respiração
+    let breathingInterval = null;
+    let breathingActive = false;
+
+    function startBreathing() {
+      const circle = document.getElementById('breathing-circle');
+      const btn = document.getElementById('start-breathing');
+
+      if (breathingActive) {
+        clearInterval(breathingInterval);
+        breathingActive = false;
+        btn.textContent = 'Iniciar Exercício';
+        circle.style.transform = 'scale(1)';
+        circle.textContent = 'Respire';
+        return;
+      }
+
+      breathingActive = true;
+      btn.textContent = 'Parar Exercício';
+
+      let phase = 0;
+      const phases = [
+        { text: 'Inspire...', scale: 'scale(1.3)', duration: 4000 },
+        { text: 'Segure...', scale: 'scale(1.3)', duration: 4000 },
+        { text: 'Expire...', scale: 'scale(1)', duration: 4000 },
+      ];
+
+      function nextPhase() {
+        const current = phases[phase % 3];
+        circle.textContent = current.text;
+        circle.style.transform = current.scale;
+        phase++;
+      }
+
+      nextPhase();
+      breathingInterval = setInterval(nextPhase, 4000);
+    }
+  </script>
+</body>
+</html>

@@ -88,7 +88,7 @@ HUGTEA/
 ## 📄 Licença
 
 Projeto acadêmico — ETEC 2026
-
+ https://luizasoaresmarttins.github.io/HUGTEA/
 ---
 
 *Feito com 💜 pela equipe HUGTEA*

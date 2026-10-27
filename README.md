@@ -4,6 +4,8 @@
 
 O **HUGTEA** (Projeto TCC ETEC 2026) busca facilitar a rotina e promover mais autonomia e inclusão para pessoas autistas, oferecendo uma solução tecnológica acessível e adaptada às suas necessidades sensoriais e funcionais.
 
+🌐 **Acesse o site:** [https://luizasoaresmarttins.github.io/HUGTEA/](https://luizasoaresmarttins.github.io/HUGTEA/)
+
 ---
 
 ## 🌟 Funcionalidades Principais

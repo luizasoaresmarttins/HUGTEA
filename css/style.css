@@ -9,29 +9,34 @@
 
 /* ---- CSS Custom Properties (Design Tokens) ---- */
 :root {
-  /* Primary — Lavanda suave (calma, acolhimento) */
-  --clr-primary-100: #f3eeff;
-  --clr-primary-200: #e0d4fc;
-  --clr-primary-300: #c4b1f5;
-  --clr-primary-400: #a78bfa;
-  --clr-primary-500: #8b5cf6;
-  --clr-primary-600: #7c3aed;
-  --clr-primary-700: #6d28d9;
+  /* Primary — Índigo e Violeta Real (extraídos da logo) */
+  --clr-primary-50: #f5f3ff;
+  --clr-primary-100: #eeebff;
+  --clr-primary-200: #dcd4fe;
+  --clr-primary-300: #c1b2fc;
+  --clr-primary-400: #9373f7;
+  --clr-primary-500: #6b28d9;
+  --clr-primary-600: #4b2f9e; /* Tom índigo principal da lateral esquerda da logo */
+  --clr-primary-700: #39227c;
+  --clr-primary-800: #231c69; /* Tom midnight indigo da logo */
+  --clr-primary-900: #191338;
 
-  /* Secondary — Turquesa suave (serenidade) */
-  --clr-secondary-100: #e6fcf5;
-  --clr-secondary-200: #b2f5ea;
-  --clr-secondary-300: #81e6d9;
-  --clr-secondary-400: #4fd1c5;
-  --clr-secondary-500: #38b2ac;
-  --clr-secondary-600: #319795;
+  /* Secondary — Feixe Ciano e Turquesa Luminoso (extraído do feixe da logo) */
+  --clr-secondary-50: #f0fdfc;
+  --clr-secondary-100: #e0f9f8;
+  --clr-secondary-200: #b5f3f0;
+  --clr-secondary-300: #7cf8f8; /* Tom do feixe de luz ciano da logo */
+  --clr-secondary-400: #22d3ee; /* Ciano elétrico da logo */
+  --clr-secondary-500: #0891b2; /* Ciano/Turquesa profundo para contraste e legibilidade */
+  --clr-secondary-600: #0e7490;
 
-  /* Accent — Rosa suave */
-  --clr-accent-100: #fff0f6;
-  --clr-accent-200: #fcc2d7;
-  --clr-accent-300: #f783ac;
-  --clr-accent-400: #f06595;
-  --clr-accent-500: #e64980;
+  /* Accent — Violeta e Magenta Vibrante (lateral direita da logo) */
+  --clr-accent-100: #fbf0ff;
+  --clr-accent-200: #f3d4fc;
+  --clr-accent-300: #e3a6fa;
+  --clr-accent-400: #ba54ea;
+  --clr-accent-500: #721aa5; /* Tom violeta elétrico da logo */
+  --clr-accent-600: #581c87;
 
   /* Warm — Amarelo acolhedor */
   --clr-warm-100: #fffbeb;
@@ -40,31 +45,39 @@
   --clr-warm-400: #fbbf24;
   --clr-warm-500: #f59e0b;
 
-  /* Neutrals */
+  /* Neutrals com matizes suaves da logo */
   --clr-white: #ffffff;
-  --clr-bg: #faf8ff;
-  --clr-bg-alt: #f5f0ff;
+  --clr-bg: #f8f9fd;
+  --clr-bg-alt: #edf1fc;
   --clr-surface: #ffffff;
-  --clr-surface-hover: #f9f5ff;
-  --clr-border: #e9e2f5;
-  --clr-border-light: #f0ebfa;
-  --clr-text-primary: #2d2346;
-  --clr-text-secondary: #6b5b8a;
-  --clr-text-muted: #9a8cb5;
+  --clr-surface-hover: #f3f5fd;
+  --clr-border: #e2e6f4;
+  --clr-border-light: #eceff8;
+  --clr-text-primary: #1e1738;
+  --clr-text-secondary: #534c70;
+  --clr-text-muted: #837c9f;
   --clr-text-inverse: #ffffff;
 
   /* Feedback */
   --clr-success: #10b981;
   --clr-warning: #f59e0b;
   --clr-error: #ef4444;
-  --clr-info: #3b82f6;
+  --clr-info: #0891b2;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(139, 92, 246, 0.05);
-  --shadow-md: 0 4px 12px rgba(139, 92, 246, 0.08);
-  --shadow-lg: 0 8px 30px rgba(139, 92, 246, 0.12);
-  --shadow-xl: 0 20px 60px rgba(139, 92, 246, 0.15);
-  --shadow-glow: 0 0 30px rgba(139, 92, 246, 0.2);
+  /* Gradientes temáticos da logo */
+  --grad-logo: linear-gradient(135deg, #4b2f9e 0%, #22d3ee 50%, #721aa5 100%);
+  --grad-primary: linear-gradient(135deg, #4b2f9e 0%, #721aa5 100%);
+  --grad-primary-hover: linear-gradient(135deg, #39227c 0%, #581c87 100%);
+  --grad-secondary: linear-gradient(135deg, #22d3ee 0%, #0891b2 100%);
+  --grad-cyan-glow: linear-gradient(135deg, #7cf8f8 0%, #22d3ee 100%);
+
+  /* Shadows com matiz índigo/ciano */
+  --shadow-sm: 0 1px 3px rgba(75, 47, 158, 0.06);
+  --shadow-md: 0 4px 14px rgba(75, 47, 158, 0.08);
+  --shadow-lg: 0 10px 30px rgba(75, 47, 158, 0.12);
+  --shadow-xl: 0 20px 50px rgba(75, 47, 158, 0.16);
+  --shadow-glow: 0 0 30px rgba(34, 211, 238, 0.35);
+  --shadow-glow-purple: 0 0 30px rgba(114, 26, 165, 0.25);
 
   /* Borders */
   --radius-sm: 8px;
@@ -239,7 +252,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar.scrolled {
-  background: rgba(250, 248, 255, 0.95);
+  background: rgba(255, 255, 255, 0.96);
   box-shadow: var(--shadow-md);
 }
 
@@ -259,12 +272,31 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 800;
   color: var(--clr-primary-600);
   text-decoration: none;
+  transition: transform var(--transition-fast);
+}
+
+.navbar__logo img,
+.navbar__logo-img {
+  height: 44px;
+  max-height: 44px;
+  width: auto;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+  box-shadow: 0 2px 10px rgba(75, 47, 158, 0.2);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  display: block;
+}
+
+.navbar__logo:hover img,
+.navbar__logo:hover .navbar__logo-img {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 4px 18px rgba(34, 211, 238, 0.38);
 }
 
 .navbar__logo-icon {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, var(--clr-primary-400), var(--clr-secondary-400));
+  background: var(--grad-primary);
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
@@ -272,6 +304,13 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.4rem;
   color: white;
   box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.navbar__logo-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .navbar__links {
@@ -303,7 +342,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .navbar__cta {
   padding: var(--sp-2) var(--sp-5);
-  background: linear-gradient(135deg, var(--clr-primary-500), var(--clr-primary-600));
+  background: var(--grad-primary);
   color: var(--clr-text-inverse) !important;
   border: none;
   border-radius: var(--radius-full);
@@ -312,13 +351,13 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
   transition: all var(--transition-base);
   text-decoration: none;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 2px 8px rgba(75, 47, 158, 0.25);
 }
 
 .navbar__cta:hover {
   transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
-  background: linear-gradient(135deg, var(--clr-primary-600), var(--clr-primary-700));
+  box-shadow: 0 6px 20px rgba(114, 26, 165, 0.35);
+  background: var(--grad-primary-hover);
 }
 
 /* Hamburger */
@@ -372,15 +411,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, var(--clr-primary-500), var(--clr-primary-600));
+  background: var(--grad-primary);
   color: var(--clr-text-inverse);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 14px rgba(75, 47, 158, 0.25);
 }
 
 .btn--primary:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
-  background: linear-gradient(135deg, var(--clr-primary-600), var(--clr-primary-700));
+  box-shadow: 0 8px 24px rgba(114, 26, 165, 0.35);
+  background: var(--grad-primary-hover);
   color: var(--clr-text-inverse);
 }
 
@@ -397,14 +436,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .btn--accent {
-  background: linear-gradient(135deg, var(--clr-secondary-400), var(--clr-secondary-500));
+  background: var(--grad-secondary);
   color: var(--clr-text-inverse);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 14px rgba(8, 145, 178, 0.25);
 }
 
 .btn--accent:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 8px 24px rgba(34, 211, 238, 0.45);
   color: var(--clr-text-inverse);
 }
 
@@ -514,7 +553,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: var(--fs-3xl);
   font-weight: 800;
   margin-bottom: var(--sp-4);
-  background: linear-gradient(135deg, var(--clr-primary-600), var(--clr-secondary-500));
+  background: linear-gradient(135deg, var(--clr-primary-600) 0%, var(--clr-secondary-500) 50%, var(--clr-accent-500) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -630,7 +669,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero__title span {
-  background: linear-gradient(135deg, var(--clr-primary-500), var(--clr-secondary-400));
+  background: linear-gradient(135deg, var(--clr-primary-600) 0%, var(--clr-secondary-400) 50%, var(--clr-accent-500) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -845,9 +884,27 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ---- Footer ---- */
 .footer {
-  background: var(--clr-text-primary);
+  background: var(--clr-primary-900);
   color: var(--clr-text-inverse);
   padding: var(--sp-16) 0 var(--sp-8);
+  position: relative;
+  overflow: hidden;
+  border-top: 2px solid rgba(124, 248, 248, 0.2);
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20%;
+  width: 500px;
+  height: 150px;
+  background: radial-gradient(ellipse at top, rgba(34, 211, 238, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.footer .navbar__logo-img {
+  box-shadow: 0 2px 14px rgba(34, 211, 238, 0.25);
 }
 
 .footer__grid {
@@ -855,6 +912,8 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: var(--sp-10);
   margin-bottom: var(--sp-12);
+  position: relative;
+  z-index: 1;
 }
 
 .footer__brand-text {
@@ -883,7 +942,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer__link:hover {
-  color: var(--clr-primary-300);
+  color: var(--clr-secondary-300);
 }
 
 .footer__bottom {
@@ -894,6 +953,8 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   flex-wrap: wrap;
   gap: var(--sp-4);
+  position: relative;
+  z-index: 1;
 }
 
 .footer__copyright {
@@ -921,9 +982,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer__social-link:hover {
-  background: var(--clr-primary-500);
+  background: var(--grad-primary);
   color: var(--clr-text-inverse);
   transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(34, 211, 238, 0.35);
 }
 
 /* ---- Page Header ---- */
@@ -1033,7 +1095,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 52px;
   height: 52px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--clr-primary-500), var(--clr-secondary-500));
+  background: var(--grad-primary);
   color: var(--clr-text-inverse);
   border: none;
   cursor: pointer;
@@ -1041,13 +1103,13 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 4px 16px rgba(75, 47, 158, 0.35);
   transition: all var(--transition-base);
 }
 
 .a11y-widget__toggle:hover {
   transform: scale(1.08);
-  box-shadow: var(--shadow-xl);
+  box-shadow: 0 6px 22px rgba(34, 211, 238, 0.45);
 }
 
 .a11y-widget__panel {
@@ -1165,16 +1227,22 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .auth-card__logo {
-  width: 56px;
-  height: 56px;
+  width: 96px;
+  height: 58px;
   margin: 0 auto var(--sp-4);
-  background: linear-gradient(135deg, var(--clr-primary-400), var(--clr-secondary-400));
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
-  color: white;
+  box-shadow: 0 4px 18px rgba(75, 47, 158, 0.22);
+  overflow: hidden;
+}
+
+.auth-card__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .auth-card__title {

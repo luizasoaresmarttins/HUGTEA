@@ -57,7 +57,9 @@
                 Preencha o formulário abaixo e nossa equipe responderá em até 48 horas úteis.
               </p>
 
-              <form id="contact-form" novalidate>
+              <form id="contact-form" action="https://formsubmit.co/hugtea.oficial@gmail.com" method="POST" novalidate>
+                <!-- Honeypot anti-spam (não remover; fica oculto para usuários) -->
+                <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
                 <div class="form-group" id="group-name">
                   <label for="contact-name" class="form-label">Nome completo</label>
                   <input type="text" id="contact-name" class="form-input" placeholder="Seu nome" required autocomplete="name">
@@ -97,7 +99,7 @@
                   </label>
                 </div>
 
-                <button type="submit" class="btn btn--primary btn--large" style="width:100%;">
+                <button type="submit" id="contact-submit" class="btn btn--primary btn--large" style="width:100%;">
                   📧 Enviar Mensagem
                 </button>
               </form>
@@ -112,7 +114,7 @@
               <h3 class="card__title">E-mail</h3>
               <p class="card__text">
                 Envie diretamente para<br>
-                <a href="mailto:contato@hugtea.com.br" style="font-weight:600;">contato@hugtea.com.br</a>
+                <a href="mailto:hugtea.oficial@gmail.com" style="font-weight:600;">hugtea.oficial@gmail.com</a>
               </p>
             </div>
 
@@ -236,7 +238,7 @@
         <div class="footer__social">
           <a href="#" class="footer__social-link" aria-label="Instagram">📷</a>
           <a href="#" class="footer__social-link" aria-label="YouTube">▶</a>
-          <a href="#" class="footer__social-link" aria-label="E-mail">✉</a>
+          <a href="mailto:hugtea.oficial@gmail.com" class="footer__social-link" aria-label="E-mail">✉</a>
         </div>
       </div>
     </div>
@@ -264,7 +266,8 @@
 
   <script src="js/main.js"></script>
   <script>
-    // Validação do Formulário de Contato
+    // Formulário de Contato — envio via FormSubmit (https://formsubmit.co)
+    const CONTACT_ENDPOINT = 'https://formsubmit.co/ajax/hugtea.oficial@gmail.com';
     const contactForm = document.getElementById('contact-form');
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
@@ -320,12 +323,57 @@
           return;
         }
 
-        if (isValid) {
-          showToast('Mensagem enviada com sucesso! Responderemos em breve. 💜', 'success', 5000);
-          contactForm.reset();
-        } else {
+        if (!isValid) {
           showToast('Por favor, corrija os campos destacados.', 'error');
+          return;
         }
+
+        // Honeypot preenchido = bot; finge sucesso e não envia
+        const honey = contactForm.querySelector('input[name="_honey"]');
+        if (honey && honey.value) {
+          contactForm.reset();
+          return;
+        }
+
+        const submitBtn = document.getElementById('contact-submit');
+        const originalLabel = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '⏳ Enviando...';
+
+        const subjectLabel = subject.options[subject.selectedIndex].text;
+        const payload = {
+          nome: name.value.trim(),
+          email: email.value.trim(),
+          assunto: subjectLabel,
+          mensagem: message.value.trim(),
+          _subject: `[HUGTEA] Contato: ${subjectLabel} — ${name.value.trim()}`,
+          _replyto: email.value.trim(),
+          _template: 'table',
+          _captcha: 'false'
+        };
+
+        fetch(CONTACT_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(res => res.json().then(data => ({ ok: res.ok, data })))
+          .then(({ ok, data }) => {
+            if (ok && (data.success === true || data.success === 'true')) {
+              showToast('Mensagem enviada com sucesso! Responderemos em breve. 💜', 'success', 5000);
+              contactForm.reset();
+            } else {
+              throw new Error(data.message || 'Falha no envio');
+            }
+          })
+          .catch(err => {
+            console.error('Erro ao enviar contato:', err);
+            showToast('Não foi possível enviar sua mensagem. Tente novamente ou escreva para hugtea.oficial@gmail.com.', 'error', 6000);
+          })
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalLabel;
+          });
       });
 
       // Limpar erros ao digitar

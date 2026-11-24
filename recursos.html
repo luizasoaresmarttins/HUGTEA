@@ -7,6 +7,12 @@
   <title>Recursos e Ferramentas — HUGTEA</title>
   <link rel="stylesheet" href="css/style.css?v=2">
   <link rel="icon" type="image/png" href="img/favicon.png">
+  <style>
+    .res-link { color:inherit; text-decoration:none; flex:1; transition:color 150ms ease; }
+    .res-link::after { content:" →"; opacity:0; transition:opacity 150ms ease; }
+    .res-link:hover, .res-link:focus-visible { color:var(--clr-primary-600); text-decoration:underline; }
+    .res-link:hover::after, .res-link:focus-visible::after { opacity:1; }
+  </style>
 </head>
 <body>
   <div class="loading-overlay" aria-hidden="true"><div class="loading-spinner"></div></div>
@@ -87,13 +93,13 @@
             </p>
             <ul style="list-style:none;padding:0;">
               <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
-                <span>📌</span> Quadro visual de rotina diária
+                <span>📌</span> <a href="ferramentas.html#rotina" class="res-link">Quadro visual de rotina diária</a>
               </li>
               <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
-                <span>⏰</span> Timer visual para atividades
+                <span>⏰</span> <a href="ferramentas.html#timer" class="res-link">Timer visual para atividades</a>
               </li>
               <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);display:flex;gap:var(--sp-2);">
-                <span>✅</span> Lista de tarefas adaptada
+                <span>✅</span> <a href="ferramentas.html#tarefas" class="res-link">Lista de tarefas adaptada</a>
               </li>
             </ul>
           </div>
@@ -108,13 +114,13 @@
             </p>
             <ul style="list-style:none;padding:0;">
               <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
-                <span>🫁</span> Exercícios de respiração guiada
+                <span>🫁</span> <a href="ferramentas.html#respiracao" class="res-link">Exercícios de respiração guiada</a>
               </li>
               <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
-                <span>😊</span> Termômetro de emoções
+                <span>😊</span> <a href="ferramentas.html#termometro" class="res-link">Termômetro de emoções</a>
               </li>
               <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);display:flex;gap:var(--sp-2);">
-                <span>🎵</span> Sons relaxantes e ambientes calmos
+                <span>🎵</span> <a href="ferramentas.html#sons" class="res-link">Sons relaxantes e ambientes calmos</a>
               </li>
             </ul>
           </div>
@@ -129,16 +135,20 @@
             </p>
             <ul style="list-style:none;padding:0;">
               <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
-                <span>👋</span> Guia: como iniciar uma conversa
+                <span>👋</span> <a href="ferramentas.html#conversa" class="res-link">Guia: como iniciar uma conversa</a>
               </li>
               <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);border-bottom:1px solid var(--clr-border-light);display:flex;gap:var(--sp-2);">
-                <span>🎭</span> Entendendo expressões faciais
+                <span>🎭</span> <a href="ferramentas.html#expressoes" class="res-link">Entendendo expressões faciais</a>
               </li>
               <li style="padding:var(--sp-2) 0;font-size:var(--fs-sm);color:var(--clr-text-secondary);display:flex;gap:var(--sp-2);">
-                <span>📱</span> Dicas para comunicação online
+                <span>📱</span> <a href="ferramentas.html#online" class="res-link">Dicas para comunicação online</a>
               </li>
             </ul>
           </div>
+        </div>
+
+        <div class="animate-on-scroll" style="text-align:center;margin-top:var(--sp-10);">
+          <a href="ferramentas.html" class="btn btn--primary btn--large">🛠️ Acessar todas as ferramentas</a>
         </div>
       </div>
     </section>
@@ -258,7 +268,7 @@
         <div class="footer__social">
           <a href="#" class="footer__social-link" aria-label="Instagram">📷</a>
           <a href="#" class="footer__social-link" aria-label="YouTube">▶</a>
-          <a href="#" class="footer__social-link" aria-label="E-mail">✉</a>
+          <a href="mailto:hugtea.oficial@gmail.com" class="footer__social-link" aria-label="E-mail">✉</a>
         </div>
       </div>
     </div>

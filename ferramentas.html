@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ferramentas interativas do HUGTEA: rotina visual, timer, lista de tarefas, respiração guiada, termômetro de emoções, sons relaxantes e guias de habilidades sociais.">
+  <title>Ferramentas — HUGTEA</title>
+  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <style>
+    /* ===== Estilos específicos da página de Ferramentas ===== */
+    html { scroll-behavior: smooth; }
+    .tl-anchor { scroll-margin-top: 96px; }
+
+    .tl-quicknav { display:flex; flex-wrap:wrap; gap:var(--sp-2); justify-content:center; }
+    .tl-chip {
+      display:inline-flex; align-items:center; gap:var(--sp-2);
+      padding:var(--sp-2) var(--sp-4); border-radius:var(--radius-full);
+      background:var(--clr-surface); border:1px solid var(--clr-border-light);
+      font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary);
+      text-decoration:none; box-shadow:var(--shadow-sm); transition:var(--transition-fast);
+    }
+    .tl-chip:hover, .tl-chip:focus-visible { background:var(--clr-primary-50); border-color:var(--clr-primary-300); }
+
+    .tl-group-title {
+      font-family:var(--font-display); font-size:var(--fs-2xl); font-weight:800;
+      display:flex; align-items:center; gap:var(--sp-3); margin-bottom:var(--sp-2);
+    }
+    .tl-group-desc { color:var(--clr-text-secondary); margin-bottom:var(--sp-8); max-width:720px; }
+
+    .tl-tool { margin-bottom:var(--sp-10); }
+    .tl-tool:last-child { margin-bottom:0; }
+    .tl-tool__head { display:flex; align-items:center; gap:var(--sp-4); margin-bottom:var(--sp-4); }
+    .tl-tool__head .card__icon { margin-bottom:0; flex-shrink:0; }
+    .tl-tool__title { font-family:var(--font-display); font-size:var(--fs-xl); font-weight:700; margin:0; }
+    .tl-tool__subtitle { font-size:var(--fs-sm); color:var(--clr-text-secondary); margin:0; }
+
+    .tl-row { display:flex; flex-wrap:wrap; gap:var(--sp-3); align-items:flex-end; }
+    .tl-row .form-group { margin-bottom:0; flex:1 1 140px; }
+    .tl-btn-sm { padding:var(--sp-2) var(--sp-4); font-size:var(--fs-sm); }
+    .tl-muted { font-size:var(--fs-sm); color:var(--clr-text-muted); }
+
+    /* Rotina */
+    .tl-period { background:var(--clr-bg-alt); border-radius:var(--radius-lg); padding:var(--sp-4); min-height:160px; }
+    .tl-period h4 { font-family:var(--font-display); font-weight:700; margin-bottom:var(--sp-3); }
+    .tl-item {
+      display:flex; align-items:center; gap:var(--sp-3); background:var(--clr-surface);
+      border:1px solid var(--clr-border-light); border-radius:var(--radius-md);
+      padding:var(--sp-3); margin-bottom:var(--sp-2);
+    }
+    .tl-item__emoji { font-size:1.75rem; line-height:1; }
+    .tl-item__body { flex:1; min-width:0; }
+    .tl-item__text { font-weight:600; word-break:break-word; }
+    .tl-item__time { font-size:var(--fs-xs); color:var(--clr-text-muted); }
+    .tl-item.done .tl-item__text { text-decoration:line-through; color:var(--clr-text-muted); }
+    .tl-item.done { opacity:.75; }
+    .tl-icon-btn {
+      border:none; background:transparent; cursor:pointer; font-size:1.1rem;
+      width:36px; height:36px; border-radius:var(--radius-sm); flex-shrink:0;
+    }
+    .tl-icon-btn:hover, .tl-icon-btn:focus-visible { background:var(--clr-primary-50); }
+    .tl-check { width:22px; height:22px; accent-color:var(--clr-primary-500); flex-shrink:0; cursor:pointer; }
+
+    /* Timer */
+    .tl-timer { display:grid; grid-template-columns:auto 1fr; gap:var(--sp-10); align-items:center; }
+    .tl-timer__dial { position:relative; width:220px; height:220px; margin:0 auto; }
+    .tl-timer__dial svg { width:100%; height:100%; transform:rotate(-90deg); }
+    .tl-timer__track { fill:none; stroke:var(--clr-border-light); stroke-width:16; }
+    .tl-timer__bar { fill:none; stroke:var(--clr-secondary-400); stroke-width:16; stroke-linecap:round; transition:stroke-dashoffset 1s linear, stroke .5s; }
+    .tl-timer__label {
+      position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      font-family:var(--font-display); font-size:var(--fs-3xl); font-weight:800; color:var(--clr-primary-700);
+    }
+    .tl-timer__label small { font-size:var(--fs-xs); font-weight:600; color:var(--clr-text-muted); }
+
+    /* Progresso */
+    .tl-progress { height:12px; background:var(--clr-border-light); border-radius:var(--radius-full); overflow:hidden; margin:var(--sp-3) 0 var(--sp-5); }
+    .tl-progress__bar { height:100%; width:0; background:linear-gradient(90deg, var(--clr-secondary-400), var(--clr-primary-500)); transition:width .4s ease; }
+
+    /* Respiração */
+    .tl-breath { text-align:center; }
+    .tl-breath__circle {
+      width:200px; height:200px; border-radius:50%; margin:var(--sp-8) auto;
+      background:linear-gradient(135deg, var(--clr-primary-200), var(--clr-secondary-200));
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      font-family:var(--font-display); font-size:var(--fs-xl); font-weight:700; color:var(--clr-primary-700);
+      box-shadow:var(--shadow-lg); transition-property:transform; transition-timing-function:ease-in-out;
+    }
+    .tl-breath__count { font-size:var(--fs-3xl); line-height:1; }
+    .tl-seg { display:inline-flex; flex-wrap:wrap; gap:var(--sp-2); justify-content:center; }
+    .tl-seg button {
+      padding:var(--sp-2) var(--sp-4); border-radius:var(--radius-full); cursor:pointer;
+      border:2px solid var(--clr-border); background:var(--clr-surface); font-weight:600; font-size:var(--fs-sm);
+      color:var(--clr-text-primary);
+    }
+    .tl-seg button[aria-pressed="true"] { border-color:var(--clr-primary-500); background:var(--clr-primary-50); color:var(--clr-primary-700); }
+
+    /* Termômetro */
+    .tl-thermo { display:grid; grid-template-columns:minmax(220px, 300px) 1fr; gap:var(--sp-8); align-items:start; }
+    .tl-thermo__levels { display:flex; flex-direction:column-reverse; gap:var(--sp-2); }
+    .tl-level {
+      display:flex; align-items:center; gap:var(--sp-3); padding:var(--sp-3) var(--sp-4);
+      border-radius:var(--radius-md); border:3px solid transparent; cursor:pointer;
+      font-weight:700; font-size:var(--fs-base); text-align:left; color:#1f1f2e;
+    }
+    .tl-level span:first-child { font-size:1.6rem; }
+    .tl-level[aria-pressed="true"] { border-color:#1f1f2e; box-shadow:var(--shadow-md); transform:scale(1.02); }
+    .tl-level--1 { background:#bbf7d0; } .tl-level--2 { background:#d9f99d; }
+    .tl-level--3 { background:#fef08a; } .tl-level--4 { background:#fed7aa; } .tl-level--5 { background:#fecaca; }
+    .tl-thermo__panel { background:var(--clr-bg-alt); border-radius:var(--radius-lg); padding:var(--sp-6); min-height:100%; }
+    .tl-thermo__panel h4 { font-family:var(--font-display); font-size:var(--fs-lg); font-weight:700; margin-bottom:var(--sp-2); }
+    .tl-list { padding-left:var(--sp-5); color:var(--clr-text-secondary); line-height:1.8; }
+    .tl-list li { margin-bottom:var(--sp-1); }
+
+    /* Sons */
+    .tl-sound {
+      display:flex; flex-direction:column; align-items:center; gap:var(--sp-2); padding:var(--sp-5);
+      border-radius:var(--radius-lg); border:2px solid var(--clr-border-light); background:var(--clr-surface);
+      cursor:pointer; font-weight:700; color:var(--clr-text-primary); width:100%;
+    }
+    .tl-sound span:first-child { font-size:2rem; }
+    .tl-sound small { font-weight:500; color:var(--clr-text-muted); font-size:var(--fs-xs); }
+    .tl-sound[aria-pressed="true"] { border-color:var(--clr-secondary-400); background:var(--clr-secondary-50); box-shadow:var(--shadow-glow); }
+
+    /* Guias */
+    .tl-steps { counter-reset:step; list-style:none; padding:0; }
+    .tl-steps li { counter-increment:step; position:relative; padding:0 0 var(--sp-5) var(--sp-12); }
+    .tl-steps li::before {
+      content:counter(step); position:absolute; left:0; top:0; width:36px; height:36px; border-radius:50%;
+      background:var(--clr-primary-100); color:var(--clr-primary-700); font-weight:800;
+      display:flex; align-items:center; justify-content:center; font-family:var(--font-display);
+    }
+    .tl-steps strong { display:block; margin-bottom:var(--sp-1); }
+    .tl-steps p { color:var(--clr-text-secondary); margin:0; }
+    .tl-phrase { display:inline-block; background:var(--clr-secondary-50); border-radius:var(--radius-sm); padding:2px var(--sp-2); margin:2px 0; font-size:var(--fs-sm); }
+
+    .tl-face { text-align:center; }
+    .tl-face__emoji { font-size:3rem; line-height:1; margin-bottom:var(--sp-2); }
+    .tl-face h4 { font-family:var(--font-display); font-weight:700; margin-bottom:var(--sp-2); }
+    .tl-face p { font-size:var(--fs-sm); color:var(--clr-text-secondary); text-align:left; margin-bottom:var(--sp-1); }
+
+    .tl-quiz { background:var(--clr-bg-alt); border-radius:var(--radius-lg); padding:var(--sp-6); text-align:center; margin-top:var(--sp-8); }
+    .tl-quiz__clue { font-size:var(--fs-md); font-weight:600; margin:var(--sp-4) 0; }
+    .tl-quiz__opts { display:flex; flex-wrap:wrap; gap:var(--sp-2); justify-content:center; margin-bottom:var(--sp-4); }
+    .tl-quiz__opts button { min-width:120px; }
+    .tl-quiz__opts button.correct { background:#bbf7d0; border-color:#16a34a; }
+    .tl-quiz__opts button.wrong { background:#fecaca; border-color:#dc2626; }
+    .tl-quiz__feedback { min-height:1.5em; font-weight:600; }
+
+    .tl-table { width:100%; border-collapse:collapse; font-size:var(--fs-sm); }
+    .tl-table th, .tl-table td { text-align:left; padding:var(--sp-3); border-bottom:1px solid var(--clr-border-light); }
+    .tl-table th { font-family:var(--font-display); color:var(--clr-primary-700); }
+    .tl-table code { background:var(--clr-primary-50); padding:2px 6px; border-radius:4px; font-weight:700; }
+
+    .tl-empty { font-size:var(--fs-sm); color:var(--clr-text-muted); font-style:italic; }
+
+    @media (max-width: 768px) {
+      .tl-timer, .tl-thermo { grid-template-columns:1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tl-breath__circle, .tl-timer__bar, .tl-progress__bar { transition:none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-overlay" aria-hidden="true"><div class="loading-spinner"></div></div>
+  <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" role="navigation" aria-label="Navegação principal">
+    <div class="container">
+      <a href="index.html" class="navbar__logo" aria-label="HUGTEA - Ir para página inicial">
+        <img src="img/logo-banner.png" alt="HUGTEA" class="navbar__logo-img" style="height: 44px; width: auto;">
+      </a>
+      <div class="navbar__links" id="nav-links">
+        <a href="index.html" class="navbar__link">Início</a>
+        <a href="sobre-tea.html" class="navbar__link">Sobre TEA</a>
+        <a href="recursos.html" class="navbar__link active">Recursos</a>
+        <a href="contato.html" class="navbar__link">Contato</a>
+        <a href="login.html" class="navbar__cta">Entrar</a>
+      </div>
+      <button class="navbar__hamburger" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main id="main-content">
+    <!-- PAGE HEADER -->
+    <section class="page-header" aria-labelledby="page-title">
+      <div class="container">
+        <h1 class="page-header__title" id="page-title">Ferramentas HUGTEA</h1>
+        <p class="page-header__subtitle">
+          Ferramentas interativas e guias práticos para organização, bem-estar e convivência
+        </p>
+      </div>
+    </section>
+
+    <!-- NAVEGAÇÃO RÁPIDA -->
+    <section class="section" style="padding-bottom:0;" aria-label="Navegação rápida entre ferramentas">
+      <div class="container">
+        <p style="text-align:center;margin-bottom:var(--sp-4);">
+          <a href="recursos.html" style="font-weight:600;">← Voltar para Recursos</a>
+        </p>
+        <nav class="tl-quicknav" aria-label="Ir para ferramenta">
+          <a class="tl-chip" href="#rotina">📌 Rotina diária</a>
+          <a class="tl-chip" href="#timer">⏰ Timer visual</a>
+          <a class="tl-chip" href="#tarefas">✅ Lista de tarefas</a>
+          <a class="tl-chip" href="#respiracao">🫁 Respiração guiada</a>
+          <a class="tl-chip" href="#termometro">😊 Termômetro de emoções</a>
+          <a class="tl-chip" href="#sons">🎵 Sons relaxantes</a>
+          <a class="tl-chip" href="#conversa">👋 Iniciar conversa</a>
+          <a class="tl-chip" href="#expressoes">🎭 Expressões faciais</a>
+          <a class="tl-chip" href="#online">📱 Comunicação online</a>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ============ ORGANIZAÇÃO E ROTINA ============ -->
+    <section class="section" aria-labelledby="g-rotina">
+      <div class="container">
+        <h2 class="tl-group-title" id="g-rotina"><span aria-hidden="true">📅</span> Organização e Rotina</h2>
+        <p class="tl-group-desc">Ferramentas para deixar o dia mais previsível e confortável. Tudo o que você cria aqui fica salvo apenas neste navegador.</p>
+
+        <!-- Quadro visual de rotina -->
+        <article class="card tl-tool tl-anchor" id="rotina" aria-labelledby="t-rotina">
+          <div class="tl-tool__head">
+            <div class="card__icon card__icon--purple" aria-hidden="true">📌</div>
+            <div>
+              <h3 class="tl-tool__title" id="t-rotina">Quadro visual de rotina diária</h3>
+              <p class="tl-tool__subtitle">Monte sua rotina com figuras e horários. Marque cada atividade quando terminar.</p>
+            </div>
+          </div>
+
+          <form id="routine-form" class="tl-row" style="margin-bottom:var(--sp-6);">
+            <div class="form-group" style="flex:0 0 90px;">
+              <label for="routine-emoji" class="form-label">Figura</label>
+              <select id="routine-emoji" class="form-select" aria-label="Figura da atividade">
+                <option>☀️</option><option>🪥</option><option>🚿</option><option>👕</option><option>🍳</option>
+                <option>🍽️</option><option>🎒</option><option>📚</option><option>💻</option><option>🚌</option>
+                <option>🎮</option><option>🎨</option><option>🏃</option><option>💊</option><option>🧸</option>
+                <option>📺</option><option>🛁</option><option>🌙</option><option>😴</option>
+              </select>
+            </div>
+            <div class="form-group" style="flex:2 1 200px;">
+              <label for="routine-text" class="form-label">Atividade</label>
+              <input id="routine-text" class="form-input" type="text" maxlength="60" placeholder="Ex.: Escovar os dentes" required>
+            </div>
+            <div class="form-group" style="flex:0 1 130px;">
+              <label for="routine-time" class="form-label">Horário</label>
+              <input id="routine-time" class="form-input" type="time">
+            </div>
+            <div class="form-group" style="flex:0 1 140px;">
+              <label for="routine-period" class="form-label">Período</label>
+              <select id="routine-period" class="form-select">
+                <option value="manha">Manhã</option>
+                <option value="tarde">Tarde</option>
+                <option value="noite">Noite</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn--primary">➕ Adicionar</button>
+          </form>
+
+          <div class="grid grid--3" id="routine-board">
+            <div class="tl-period"><h4>🌅 Manhã</h4><div data-period="manha"></div></div>
+            <div class="tl-period"><h4>🌤️ Tarde</h4><div data-period="tarde"></div></div>
+            <div class="tl-period"><h4>🌙 Noite</h4><div data-period="noite"></div></div>
+          </div>
+
+          <div class="tl-row" style="margin-top:var(--sp-4);justify-content:space-between;align-items:center;">
+            <span class="tl-muted" id="routine-progress" aria-live="polite"></span>
+            <div class="tl-row">
+              <button type="button" class="btn btn--secondary tl-btn-sm" id="routine-reset">🔄 Começar novo dia</button>
+              <button type="button" class="btn btn--secondary tl-btn-sm" id="routine-example">✨ Carregar exemplo</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Timer visual -->
+        <article class="card tl-tool tl-anchor" id="timer" aria-labelledby="t-timer">
+          <div class="tl-tool__head">
+            <div class="card__icon card__icon--teal" aria-hidden="true">⏰</div>
+            <div>
+              <h3 class="tl-tool__title" id="t-timer">Timer visual para atividades</h3>
+              <p class="tl-tool__subtitle">Veja o tempo passar pelo círculo que vai diminuindo. Ajuda a saber quanto falta para terminar.</p>
+            </div>
+          </div>
+
+          <div class="tl-timer">
+            <div class="tl-timer__dial">
+              <svg viewBox="0 0 200 200" aria-hidden="true">
+                <circle class="tl-timer__track" cx="100" cy="100" r="90"></circle>
+                <circle class="tl-timer__bar" id="timer-bar" cx="100" cy="100" r="90"></circle>
+              </svg>
+              <div class="tl-timer__label" role="timer" aria-live="off">
+                <span id="timer-display">05:00</span>
+                <small id="timer-status">Pronto</small>
+              </div>
+            </div>
+
+            <div>
+              <p class="form-label" style="margin-bottom:var(--sp-2);">Escolha o tempo</p>
+              <div class="tl-seg" id="timer-presets" style="justify-content:flex-start;margin-bottom:var(--sp-4);">
+                <button type="button" data-min="1" aria-pressed="false">1 min</button>
+                <button type="button" data-min="5" aria-pressed="true">5 min</button>
+                <button type="button" data-min="10" aria-pressed="false">10 min</button>
+                <button type="button" data-min="15" aria-pressed="false">15 min</button>
+                <button type="button" data-min="25" aria-pressed="false">25 min</button>
+              </div>
+              <div class="tl-row" style="margin-bottom:var(--sp-4);">
+                <div class="form-group" style="flex:0 1 180px;">
+                  <label for="timer-custom" class="form-label">Ou digite os minutos</label>
+                  <input id="timer-custom" class="form-input" type="number" min="1" max="180" placeholder="Ex.: 20">
+                </div>
+                <button type="button" class="btn btn--secondary" id="timer-set">Definir</button>
+              </div>
+              <div class="tl-row" style="margin-bottom:var(--sp-3);">
+                <button type="button" class="btn btn--primary" id="timer-start">▶ Iniciar</button>
+                <button type="button" class="btn btn--secondary" id="timer-reset">↺ Reiniciar</button>
+              </div>
+              <label style="display:flex;align-items:center;gap:var(--sp-2);font-size:var(--fs-sm);color:var(--clr-text-secondary);cursor:pointer;">
+                <input type="checkbox" id="timer-sound" checked class="tl-check" style="width:18px;height:18px;">
+                Tocar um som suave quando o tempo acabar
+              </label>
+            </div>
+          </div>
+        </article>
+
+        <!-- Lista de tarefas -->
+        <article class="card tl-tool tl-anchor" id="tarefas" aria-labelledby="t-tarefas">
+          <div class="tl-tool__head">
+            <div class="card__icon card__icon--pink" aria-hidden="true">✅</div>
+            <div>
+              <h3 class="tl-tool__title" id="t-tarefas">Lista de tarefas adaptada</h3>
+              <p class="tl-tool__subtitle">Divida as tarefas grandes em passos pequenos. Um passo de cada vez!</p>
+            </div>
+          </div>
+
+          <form id="task-form" class="tl-row" style="margin-bottom:var(--sp-2);">
+            <div class="form-group" style="flex:3 1 240px;">
+              <label for="task-text" class="form-label">Nova tarefa ou passo</label>
+              <input id="task-text" class="form-input" type="text" maxlength="80" placeholder="Ex.: Separar o material da escola" required>
+            </div>
+            <button type="submit" class="btn btn--primary">➕ Adicionar</button>
+          </form>
+
+          <div class="tl-progress" role="progressbar" aria-label="Progresso das tarefas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="task-progress">
+            <div class="tl-progress__bar" id="task-progress-bar"></div>
+          </div>
+          <p class="tl-muted" id="task-summary" aria-live="polite" style="margin-top:calc(-1 * var(--sp-3));margin-bottom:var(--sp-4);"></p>
+
+          <div id="task-list"></div>
+
+          <div class="tl-row" style="margin-top:var(--sp-4);">
+            <button type="button" class="btn btn--secondary tl-btn-sm" id="task-clear">🧹 Remover concluídas</button>
+          </div>
+
+          <div style="margin-top:var(--sp-6);padding-top:var(--sp-4);border-top:1px solid var(--clr-border-light);">
+            <p class="form-label">💡 Dicas para uma lista que funciona</p>
+            <ul class="tl-list">
+              <li>Escreva cada passo começando com um verbo: <em>“Pegar”, “Guardar”, “Ligar”</em>.</li>
+              <li>Prefira passos curtos, que levem poucos minutos.</li>
+              <li>Use o timer visual acima para tarefas que costumam demorar.</li>
+              <li>Comemore cada passo concluído — ele conta!</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ BEM-ESTAR EMOCIONAL ============ -->
+    <section class="section section--alt" aria-labelledby="g-bemestar">
+      <div class="container">
+        <h2 class="tl-group-title" id="g-bemestar"><span aria-hidden="true">🧘</span> Bem-estar Emocional</h2>
+        <p class="tl-group-desc">Recursos para ajudar a reconhecer emoções, acalmar o corpo e criar momentos de descompressão sensorial.</p>
+
+        <!-- Respiração -->
+        <article class="card tl-tool tl-anchor" id="respiracao" aria-labelledby="t-resp">
+          <div class="tl-tool__head">
+            <div class="card__icon card__icon--teal" aria-hidden="true">🫁</div>
+            <div>
+              <h3 class="tl-tool__title" id="t-resp">Exercícios de respiração guiada</h3>
+              <p class="tl-tool__subtitle">Siga o círculo: ele cresce quando você inspira e diminui quando você expira.</p>
+            </div>
+          </div>
+
+          <div class="tl-breath">
+            <div class="tl-seg" id="breath-patterns" role="group" aria-label="Tipo de respiração">
+              <button type="button" data-pattern="simples" aria-pressed="true">🌱 Simples (4-4-4)</button>
+              <button type="button" data-pattern="quadrada" aria-pressed="false">⬜ Quadrada (4-4-4-4)</button>
+              <button type="button" data-pattern="relaxante" aria-pressed="false">🌙 Relaxante (4-7-8)</button>
+            </div>
+            <p class="tl-muted" id="breath-desc" style="margin-top:var(--sp-3);"></p>
+
+            <div class="tl-breath__circle" id="breath-circle" aria-live="polite">
+              <span id="breath-text">Respire</span>
+              <span class="tl-breath__count" id="breath-count"></span>
+            </div>
+
+            <button type="button" class="btn btn--primary btn--large" id="breath-start">Iniciar exercício</button>
+            <p class="tl-muted" id="breath-cycles" style="margin-top:var(--sp-3);">Ciclos completos: 0</p>
+          </div>
+        </article>
+
+        <!-- Termômetro -->
+        <article class="card tl-tool tl-anchor" id="termometro" aria-labelledby="t-termo">
+          <div class="tl-tool__head">
+            <div class="card__icon card__icon--warm" aria-hidden="true">😊</div>
+            <div>
+              <h3 class="tl-tool__title" id="t-termo">Termômetro de emoções</h3>
+              <p class="tl-tool__subtitle">Como você está agora? Escolha um nível para ver o que ele significa e o que pode ajudar.</p>
+            </div>
+          </div>
+
+          <div class="tl-thermo">
+            <div class="tl-thermo__levels" id="thermo-levels" role="group" aria-label="Níveis do termômetro">
+              <button type="button" class="tl-level tl-level--1" data-level="1" aria-pressed="false"><span aria-hidden="true">😌</span><span>1 · Calmo</span></button>
+              <button type="button" class="tl-level tl-level--2" data-level="2" aria-pressed="false"><span aria-hidden="true">🙂</span><span>2 · Bem</span></button>
+              <button type="button" class="tl-level tl-level--3" data-level="3" aria-pressed="false"><span aria-hidden="true">😕</span><span>3 · Incomodado</span></button>
+              <button type="button" class="tl-level tl-level--4" data-level="4" aria-pressed="false"><span aria-hidden="true">😣</span><span>4 · Muito agitado</span></button>
+              <button type="button" class="tl-level tl-level--5" data-level="5" aria-pressed="false"><span aria-hidden="true">😫</span><span>5 · Sobrecarregado</span></button>
+            </div>
+            <div class="tl-thermo__panel" id="thermo-panel" aria-live="polite">
+              <h4>Escolha um nível ao lado 👈</h4>
+              <p style="color:var(--clr-text-secondary);line-height:1.8;">
+                Não existe resposta certa ou errada. Perceber como você se sente já é um ótimo primeiro passo
+                para cuidar de si mesmo.
+              </p>
+            </div>
+          </div>
+        </article>
+
+        <!-- Sons -->
+        <article class="card tl-tool tl-anchor" id="sons" aria-labelledby="t-sons">
+          <div class="tl-tool__head">
+            <div class="card__icon card__icon--purple" aria-hidden="true">🎵</div>
+            <div>
+              <h3 class="tl-tool__title" id="t-sons">Sons relaxantes e ambientes calmos</h3>
+              <p class="tl-tool__subtitle">Sons contínuos que ajudam a abafar barulhos e a concentrar ou relaxar. Toque em um para ouvir.</p>
+            </div>
+          </div>
+
+          <div class="grid grid--4" id="sound-buttons" style="margin-bottom:var(--sp-5);">
+            <button type="button" class="tl-sound" data-sound="chuva" aria-pressed="false"><span aria-hidden="true">🌧️</span>Chuva<small>suave e constante</small></button>
+            <button type="button" class="tl-sound" data-sound="mar" aria-pressed="false"><span aria-hidden="true">🌊</span>Ondas do mar<small>vai e vem lento</small></button>
+            <button type="button" class="tl-sound" data-sound="vento" aria-pressed="false"><span aria-hidden="true">🍃</span>Vento<small>grave e abafado</small></button>
+            <button type="button" class="tl-sound" data-sound="branco" aria-pressed="false"><span aria-hidden="true">📻</span>Ruído branco<small>bloqueia barulhos</small></button>
+          </div>
+
+          <div class="tl-row" style="align-items:center;margin-bottom:var(--sp-6);">
+            <label for="sound-volume" class="form-label" style="margin:0;">🔉 Volume</label>
+            <input type="range" id="sound-volume" min="0" max="100" value="40" style="flex:1 1 200px;accent-color:var(--clr-primary-500);">
+            <button type="button" class="btn btn--secondary tl-btn-sm" id="sound-stop">⏹ Parar som</button>
+          </div>
+          <p class="tl-muted" style="margin-bottom:var(--sp-6);">Comece com o volume baixo e aumente aos poucos, até ficar confortável.</p>
+
+          <div style="padding-top:var(--sp-4);border-top:1px solid var(--clr-border-light);">
+            <p class="form-label">🏡 Como criar um ambiente calmo</p>
+            <div class="grid grid--2">
+              <ul class="tl-list">
+                <li><strong>Luz:</strong> prefira luz amarelada e indireta; evite lâmpadas que piscam.</li>
+                <li><strong>Som:</strong> use fones abafadores ou os sons acima para reduzir ruídos.</li>
+                <li><strong>Cantinho seguro:</strong> separe um lugar com almofadas, manta e objetos de conforto.</li>
+              </ul>
+              <ul class="tl-list">
+                <li><strong>Toque:</strong> cobertor pesado, roupas macias e objetos de apertar ajudam a regular.</li>
+                <li><strong>Telas:</strong> diminua o brilho e ative o modo escuro à noite.</li>
+                <li><strong>Pausas:</strong> combine com as pessoas próximas um sinal para pedir um tempo.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ HABILIDADES SOCIAIS ============ -->
+    <section class="section" aria-labelledby="g-social">
+      <div class="container">
+        <h2 class="tl-group-title" id="g-social"><span aria-hidden="true">🤝</span> Habilidades Sociais</h2>
+        <p class="tl-group-desc">Guias claros e diretos para situações do dia a dia. Use o que fizer sentido para você — não existe um jeito único e certo de se comunicar.</p>
+
+        <!-- Conversa -->
+        <article class="card tl-tool tl-anchor" id="conversa" aria-labelledby="t-conversa">
+          <div class="tl-tool__head">
+            <div class="card__icon card__icon--pink" aria-hidden="true">👋</div>
+            <div>
+              <h3 class="tl-tool__title" id="t-conversa">Guia: como iniciar uma conversa</h3>
+              <p class="tl-tool__subtitle">Um passo a passo com frases prontas que você pode usar ou adaptar.</p>
+            </div>
+          </div>
+
+          <div class="grid grid--2" style="align-items:start;">
+            <ol class="tl-steps">
+              <li>
+                <strong>Observe o momento</strong>
+                <p>A pessoa parece disponível? Se ela estiver com fones, com pressa ou concentrada, talvez seja melhor esperar.</p>
+              </li>
+              <li>
+                <strong>Cumprimente</strong>
+                <p><span class="tl-phrase">“Oi, tudo bem?”</span> <span class="tl-phrase">“Olá! Posso falar com você?”</span></p>
+              </li>
+              <li>
+                <strong>Escolha um assunto simples</strong>
+                <p>Fale sobre algo que vocês dois estão vivendo: <span class="tl-phrase">“Você entendeu a tarefa de hoje?”</span> <span class="tl-phrase">“Gostei da sua camiseta, é de qual banda?”</span></p>
+              </li>
+              <li>
+                <strong>Faça perguntas e escute</strong>
+                <p>Perguntas abertas ajudam a conversa a continuar: <span class="tl-phrase">“O que você achou?”</span> <span class="tl-phrase">“Como foi seu fim de semana?”</span></p>
+              </li>
+              <li>
+                <strong>Encerre com gentileza</strong>
+                <p>Tudo bem terminar quando quiser: <span class="tl-phrase">“Foi bom conversar, até mais!”</span> <span class="tl-phrase">“Preciso ir agora, a gente se fala depois.”</span></p>
+              </li>
+            </ol>
+
+            <div>
+              <div class="card" style="background:var(--clr-bg-alt);box-shadow:none;margin-bottom:var(--sp-4);">
+                <h4 class="card__title">✅ Ajuda bastante</h4>
+                <ul class="tl-list">
+                  <li>Revezar a vez de falar: falar um pouco e depois perguntar algo.</li>
+                  <li>Se não entender algo, pedir: <span class="tl-phrase">“Pode explicar de outro jeito?”</span></li>
+                  <li>Contar sobre seus interesses — e perguntar sobre os da outra pessoa.</li>
+                </ul>
+              </div>
+              <div class="card" style="background:var(--clr-bg-alt);box-shadow:none;">
+                <h4 class="card__title">💜 Lembre-se</h4>
+                <ul class="tl-list">
+                  <li>Você não precisa manter contato visual se isso for desconfortável. Olhar para o rosto ou para perto dele também funciona.</li>
+                  <li>Silêncios curtos são normais em qualquer conversa.</li>
+                  <li>Se ficar cansativo, você pode fazer uma pausa.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Expressões -->
+        <article class="card tl-tool tl-anchor" id="expressoes" aria-labelledby="t-expr">
+          <div class="tl-tool__head">
+            <div class="card__icon card__icon--purple" aria-hidden="true">🎭</div>
+            <div>
+              <h3 class="tl-tool__title" id="t-expr">Entendendo expressões faciais</h3>
+              <p class="tl-tool__subtitle">Pistas do rosto que podem indicar o que alguém sente. São pistas, não regras — na dúvida, pergunte!</p>
+            </div>
+          </div>
+
+          <div class="grid grid--3" id="faces-grid"></div>
+
+          <div class="tl-quiz" aria-labelledby="quiz-title">
+            <h4 class="tl-tool__title" id="quiz-title">🎯 Jogo: qual é a emoção?</h4>
+            <p class="tl-quiz__clue" id="quiz-clue"></p>
+            <div class="tl-quiz__opts" id="quiz-opts"></div>
+            <p class="tl-quiz__feedback" id="quiz-feedback" aria-live="polite"></p>
+            <p class="tl-muted" id="quiz-score">Acertos: 0 de 0</p>
+            <button type="button" class="btn btn--primary tl-btn-sm" id="quiz-next" style="margin-top:var(--sp-3);">Próxima pergunta ➜</button>
+          </div>
+        </article>
+
+        <!-- Online -->
+        <article class="card tl-tool tl-anchor" id="online" aria-labelledby="t-online">
+          <div class="tl-tool__head">
+            <div class="card__icon card__icon--teal" aria-hidden="true">📱</div>
+            <div>
+              <h3 class="tl-tool__title" id="t-online">Dicas para comunicação online</h3>
+              <p class="tl-tool__subtitle">Mensagens, redes sociais e chamadas de vídeo com mais tranquilidade e segurança.</p>
+            </div>
+          </div>
+
+          <div class="grid grid--3" style="margin-bottom:var(--sp-8);">
+            <div>
+              <h4 class="card__title">💬 Mensagens</h4>
+              <ul class="tl-list">
+                <li>Não é preciso responder na hora. Você pode pensar antes de escrever.</li>
+                <li>Releia antes de enviar e veja se a mensagem está clara.</li>
+                <li>Texto em LETRAS MAIÚSCULAS costuma parecer grito.</li>
+                <li>Se não entender o tom, pergunte: <span class="tl-phrase">“Você está brincando?”</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="card__title">🎥 Chamadas de vídeo</h4>
+              <ul class="tl-list">
+                <li>Tudo bem desligar a câmera quando precisar de uma pausa.</li>
+                <li>Use fones para ouvir melhor e reduzir ruídos.</li>
+                <li>O chat da chamada é uma ótima opção se falar ficar difícil.</li>
+                <li>Teste áudio e vídeo antes de começar.</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="card__title">🔒 Segurança</h4>
+              <ul class="tl-list">
+                <li>Nunca compartilhe senhas, endereço ou documentos.</li>
+                <li>Desconfie de pedidos de dinheiro, fotos ou segredos.</li>
+                <li>Você pode bloquear e denunciar quem te deixar desconfortável.</li>
+                <li>Converse com alguém de confiança se algo parecer estranho.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h4 class="card__title">🏷️ Indicadores de tom</h4>
+          <p class="tl-muted" style="margin-bottom:var(--sp-3);">Pequenas etiquetas no fim da mensagem que deixam claro a intenção. Muito usados pela comunidade autista!</p>
+          <div style="overflow-x:auto;">
+            <table class="tl-table">
+              <thead><tr><th scope="col">Indicador</th><th scope="col">Significado</th><th scope="col">Exemplo</th></tr></thead>
+              <tbody>
+                <tr><td><code>/j</code></td><td>Estou brincando (joking)</td><td>“Vou dormir até o ano que vem /j”</td></tr>
+                <tr><td><code>/s</code></td><td>Sarcasmo</td><td>“Adoro acordar cedo na segunda /s”</td></tr>
+                <tr><td><code>/srs</code></td><td>Estou falando sério</td><td>“Preciso da sua ajuda amanhã /srs”</td></tr>
+                <tr><td><code>/gen</code></td><td>Pergunta ou fala genuína</td><td>“Por que você escolheu esse curso? /gen”</td></tr>
+                <tr><td><code>/pos</code></td><td>Intenção positiva</td><td>“Você é muito sem noção kkk /pos”</td></tr>
+                <tr><td><code>/nm</code></td><td>Não estou bravo(a)</td><td>“Você esqueceu de me responder /nm”</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- AVISO -->
+    <section class="section section--alt" aria-label="Aviso importante">
+      <div class="container" style="max-width:800px;text-align:center;">
+        <p style="color:var(--clr-text-secondary);line-height:1.8;">
+          💜 Estas ferramentas são sugestões de apoio e <strong>não substituem acompanhamento profissional</strong>.
+          Consulte sempre seu médico ou terapeuta.
+        </p>
+        <a href="recursos.html" class="btn btn--secondary" style="margin-top:var(--sp-4);">← Voltar para Recursos</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="navbar__logo footer__logo" aria-label="HUGTEA - Ir para página inicial">
+            <img src="img/logo-banner.png" alt="HUGTEA" class="navbar__logo-img" style="height: 44px; width: auto;">
+          </a>
+          <p class="footer__brand-text">Um espaço digital de acolhimento para pessoas com TEA.</p>
+        </div>
+        <div>
+          <h3 class="footer__title">Navegação</h3>
+          <a href="index.html" class="footer__link">Início</a>
+          <a href="sobre-tea.html" class="footer__link">Sobre TEA</a>
+          <a href="recursos.html" class="footer__link">Recursos</a>
+          <a href="contato.html" class="footer__link">Contato</a>
+        </div>
+        <div>
+          <h3 class="footer__title">Conta</h3>
+          <a href="login.html" class="footer__link">Entrar</a>
+          <a href="cadastro.html" class="footer__link">Criar Conta</a>
+          <a href="perfil.html" class="footer__link">Meu Perfil</a>
+        </div>
+        <div>
+          <h3 class="footer__title">Suporte</h3>
+          <a href="contato.html" class="footer__link">Fale Conosco</a>
+          <a href="#" class="footer__link">Privacidade</a>
+          <a href="#" class="footer__link">Termos de Uso</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copyright">© 2026 HUGTEA — Feito com 💜 por Luiza, Laura, Jonathan e Gabriella</p>
+        <div class="footer__social">
+          <a href="#" class="footer__social-link" aria-label="Instagram">📷</a>
+          <a href="#" class="footer__social-link" aria-label="YouTube">▶</a>
+          <a href="mailto:hugtea.oficial@gmail.com" class="footer__social-link" aria-label="E-mail">✉</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ACESSIBILIDADE -->
+  <div class="a11y-widget" aria-label="Opções de acessibilidade">
+    <button class="a11y-widget__toggle" aria-label="Abrir opções de acessibilidade" aria-expanded="false">♿</button>
+    <div class="a11y-widget__panel" role="dialog" aria-label="Painel de acessibilidade">
+      <div class="a11y-widget__title">♿ Acessibilidade</div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Alto Contraste</span>
+        <label class="toggle"><input type="checkbox" id="toggle-high-contrast"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Texto Grande</span>
+        <label class="toggle"><input type="checkbox" id="toggle-large-text"><span class="toggle__slider"></span></label>
+      </div>
+      <div class="a11y-widget__option">
+        <span class="a11y-widget__option-label">Reduzir Animações</span>
+        <label class="toggle"><input type="checkbox" id="toggle-reduced-motion"><span class="toggle__slider"></span></label>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    const $ = (id) => document.getElementById(id);
+    const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+    const load = (key, fallback) => {
+      try { const v = JSON.parse(localStorage.getItem(key)); return v ?? fallback; } catch { return fallback; }
+    };
+    const save = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); } catch {} };
+    const toast = (msg, type, dur) => { if (typeof showToast === 'function') showToast(msg, type, dur); };
+
+    // Áudio compartilhado (timer + sons)
+    let audioCtx = null;
+    function getAudio() {
+      if (!audioCtx) {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        if (!Ctx) return null;
+        audioCtx = new Ctx();
+      }
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function makeIconButton(label, icon, onClick) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'tl-icon-btn';
+      b.setAttribute('aria-label', label);
+      b.title = label;
+      b.textContent = icon;
+      b.addEventListener('click', onClick);
+      return b;
+    }
+
+    /* ================= ROTINA ================= */
+    const ROUTINE_KEY = 'hugtea-rotina';
+    const ROUTINE_EXAMPLE = [
+      { period: 'manha', time: '07:00', emoji: '☀️', text: 'Acordar' },
+      { period: 'manha', time: '07:10', emoji: '🪥', text: 'Escovar os dentes' },
+      { period: 'manha', time: '07:20', emoji: '🍳', text: 'Tomar café da manhã' },
+      { period: 'manha', time: '07:40', emoji: '🎒', text: 'Ir para a escola' },
+      { period: 'tarde', time: '12:30', emoji: '🍽️', text: 'Almoçar' },
+      { period: 'tarde', time: '14:00', emoji: '📚', text: 'Fazer a lição' },
+      { period: 'tarde', time: '16:00', emoji: '🎮', text: 'Tempo livre' },
+      { period: 'noite', time: '19:00', emoji: '🍽️', text: 'Jantar' },
+      { period: 'noite', time: '20:30', emoji: '🛁', text: 'Tomar banho' },
+      { period: 'noite', time: '21:30', emoji: '😴', text: 'Dormir' }
+    ];
+    let routine = load(ROUTINE_KEY, null);
+    if (!Array.isArray(routine)) {
+      routine = ROUTINE_EXAMPLE.map(r => ({ ...r, id: uid(), done: false }));
+    }
+
+    function renderRoutine() {
+      ['manha', 'tarde', 'noite'].forEach(period => {
+        const box = document.querySelector(`#routine-board [data-period="${period}"]`);
+        box.innerHTML = '';
+        const items = routine.filter(r => r.period === period)
+          .sort((a, b) => (a.time || '99:99').localeCompare(b.time || '99:99'));
+        if (!items.length) {
+          const p = document.createElement('p');
+          p.className = 'tl-empty';
+          p.textContent = 'Nenhuma atividade ainda.';
+          box.appendChild(p);
+          return;
+        }
+        items.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'tl-item' + (item.done ? ' done' : '');
+
+          const check = document.createElement('input');
+          check.type = 'checkbox';
+          check.className = 'tl-check';
+          check.checked = item.done;
+          check.setAttribute('aria-label', `Concluir: ${item.text}`);
+          check.addEventListener('change', () => {
+            item.done = check.checked;
+            persistRoutine();
+            if (item.done && routine.every(r => r.done)) toast('Você completou toda a rotina de hoje! 🎉', 'success', 5000);
+          });
+
+          const emoji = document.createElement('span');
+          emoji.className = 'tl-item__emoji';
+          emoji.setAttribute('aria-hidden', 'true');
+          emoji.textContent = item.emoji;
+
+          const body = document.createElement('div');
+          body.className = 'tl-item__body';
+          const text = document.createElement('div');
+          text.className = 'tl-item__text';
+          text.textContent = item.text;
+          body.appendChild(text);
+          if (item.time) {
+            const time = document.createElement('div');
+            time.className = 'tl-item__time';
+            time.textContent = item.time;
+            body.appendChild(time);
+          }
+
+          const del = makeIconButton(`Remover: ${item.text}`, '🗑️', () => {
+            routine = routine.filter(r => r.id !== item.id);
+            persistRoutine();
+          });
+
+          row.append(check, emoji, body, del);
+          box.appendChild(row);
+        });
+      });
+      const done = routine.filter(r => r.done).length;
+      $('routine-progress').textContent = routine.length
+        ? `${done} de ${routine.length} atividades concluídas hoje`
+        : '';
+    }
+    function persistRoutine() { save(ROUTINE_KEY, routine); renderRoutine(); }
+
+    $('routine-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = $('routine-text').value.trim();
+      if (!text) { toast('Escreva o nome da atividade.', 'warning'); $('routine-text').focus(); return; }
+      routine.push({
+        id: uid(), done: false, text,
+        emoji: $('routine-emoji').value,
+        time: $('routine-time').value,
+        period: $('routine-period').value
+      });
+      persistRoutine();
+      $('routine-text').value = '';
+      $('routine-time').value = '';
+      $('routine-text').focus();
+    });
+    $('routine-reset').addEventListener('click', () => {
+      routine.forEach(r => r.done = false);
+      persistRoutine();
+      toast('Rotina pronta para um novo dia! ☀️', 'info');
+    });
+    $('routine-example').addEventListener('click', () => {
+      if (routine.length && !confirm('Isso vai substituir sua rotina atual pelo exemplo. Continuar?')) return;
+      routine = ROUTINE_EXAMPLE.map(r => ({ ...r, id: uid(), done: false }));
+      persistRoutine();
+    });
+    renderRoutine();
+
+    /* ================= TIMER ================= */
+    const CIRC = 2 * Math.PI * 90;
+    const bar = $('timer-bar');
+    bar.style.strokeDasharray = CIRC;
+    let timerTotal = 5 * 60, timerLeft = timerTotal, timerId = null, timerEnd = 0;
+
+    function fmt(sec) {
+      const m = Math.floor(sec / 60), s = sec % 60;
+      return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+    }
+    function renderTimer() {
+      $('timer-display').textContent = fmt(timerLeft);
+      const frac = timerTotal ? timerLeft / timerTotal : 0;
+      bar.style.strokeDashoffset = CIRC * (1 - frac);
+      bar.style.stroke = frac > 0.5 ? 'var(--clr-secondary-400)' : frac > 0.2 ? 'var(--clr-warm-400, #fbbf24)' : 'var(--clr-accent-400, #f472b6)';
+    }
+    function setTimer(minutes) {
+      stopTimer();
+      timerTotal = timerLeft = Math.round(minutes * 60);
+      $('timer-status').textContent = 'Pronto';
+      $('timer-start').textContent = '▶ Iniciar';
+      renderTimer();
+    }
+    function stopTimer() { clearInterval(timerId); timerId = null; }
+    function chime() {
+      if (!$('timer-sound').checked) return;
+      const ctx = getAudio(); if (!ctx) return;
+      [523.25, 659.25, 783.99].forEach((f, i) => {
+        const o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'sine'; o.frequency.value = f;
+        const t = ctx.currentTime + i * 0.35;
+        g.gain.setValueAtTime(0, t);
+        g.gain.linearRampToValueAtTime(0.2, t + 0.05);
+        g.gain.exponentialRampToValueAtTime(0.001, t + 1.2);
+        o.connect(g).connect(ctx.destination);
+        o.start(t); o.stop(t + 1.3);
+      });
+    }
+    function tick() {
+      timerLeft = Math.max(0, Math.round((timerEnd - Date.now()) / 1000));
+      renderTimer();
+      if (timerLeft <= 0) {
+        stopTimer();
+        $('timer-status').textContent = 'Tempo esgotado!';
+        $('timer-start').textContent = '▶ Iniciar';
+        chime();
+        toast('O tempo acabou! ⏰', 'info', 5000);
+      }
+    }
+    $('timer-start').addEventListener('click', () => {
+      if (timerId) {
+        stopTimer();
+        $('timer-status').textContent = 'Pausado';
+        $('timer-start').textContent = '▶ Continuar';
+        return;
+      }
+      if (timerLeft <= 0) timerLeft = timerTotal;
+      getAudio(); // libera o áudio no clique (necessário em alguns navegadores)
+      timerEnd = Date.now() + timerLeft * 1000;
+      timerId = setInterval(tick, 250);
+      $('timer-status').textContent = 'Em andamento';
+      $('timer-start').textContent = '⏸ Pausar';
+    });
+    $('timer-reset').addEventListener('click', () => setTimer(timerTotal / 60));
+    $('timer-presets').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-min]'); if (!btn) return;
+      $('timer-presets').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+      setTimer(Number(btn.dataset.min));
+    });
+    $('timer-set').addEventListener('click', () => {
+      const v = Number($('timer-custom').value);
+      if (!v || v < 1 || v > 180) { toast('Digite um tempo entre 1 e 180 minutos.', 'warning'); return; }
+      $('timer-presets').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      setTimer(v);
+    });
+    renderTimer();
+
+    /* ================= TAREFAS ================= */
+    const TASK_KEY = 'hugtea-tarefas';
+    let tasks = load(TASK_KEY, []);
+    if (!Array.isArray(tasks)) tasks = [];
+
+    function renderTasks() {
+      const list = $('task-list');
+      list.innerHTML = '';
+      if (!tasks.length) {
+        const p = document.createElement('p');
+        p.className = 'tl-empty';
+        p.textContent = 'Sua lista está vazia. Adicione a primeira tarefa acima!';
+        list.appendChild(p);
+      }
+      tasks.forEach((t, idx) => {
+        const row = document.createElement('div');
+        row.className = 'tl-item' + (t.done ? ' done' : '');
+
+        const check = document.createElement('input');
+        check.type = 'checkbox';
+        check.className = 'tl-check';
+        check.checked = t.done;
+        check.setAttribute('aria-label', `Concluir: ${t.text}`);
+        check.addEventListener('change', () => {
+          t.done = check.checked;
+          persistTasks();
+          if (t.done) toast(tasks.every(x => x.done) ? 'Todas as tarefas concluídas! Parabéns! 🎉' : 'Muito bem! Mais um passo concluído. ⭐', 'success');
+        });
+
+        const body = document.createElement('div');
+        body.className = 'tl-item__body';
+        const text = document.createElement('div');
+        text.className = 'tl-item__text';
+        text.textContent = t.text;
+        body.appendChild(text);
+
+        const up = makeIconButton(`Mover para cima: ${t.text}`, '⬆️', () => {
+          if (idx === 0) return;
+          [tasks[idx - 1], tasks[idx]] = [tasks[idx], tasks[idx - 1]];
+          persistTasks();
+        });
+        const del = makeIconButton(`Remover: ${t.text}`, '🗑️', () => {
+          tasks = tasks.filter(x => x.id !== t.id);
+          persistTasks();
+        });
+        row.append(check, body, up, del);
+        list.appendChild(row);
+      });
+
+      const done = tasks.filter(t => t.done).length;
+      const pct = tasks.length ? Math.round(done / tasks.length * 100) : 0;
+      $('task-progress-bar').style.width = pct + '%';
+      $('task-progress').setAttribute('aria-valuenow', String(pct));
+      $('task-summary').textContent = tasks.length ? `${done} de ${tasks.length} concluídas (${pct}%)` : '';
+    }
+    function persistTasks() { save(TASK_KEY, tasks); renderTasks(); }
+
+    $('task-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = $('task-text').value.trim();
+      if (!text) { toast('Escreva a tarefa antes de adicionar.', 'warning'); $('task-text').focus(); return; }
+      tasks.push({ id: uid(), text, done: false });
+      persistTasks();
+      $('task-text').value = '';
+      $('task-text').focus();
+    });
+    $('task-clear').addEventListener('click', () => {
+      tasks = tasks.filter(t => !t.done);
+      persistTasks();
+    });
+    renderTasks();
+
+    /* ================= RESPIRAÇÃO ================= */
+    const PATTERNS = {
+      simples: {
+        desc: 'Inspire por 4 segundos, segure por 4 e expire por 4. Ótima para começar.',
+        phases: [['Inspire', 4, 1.3], ['Segure', 4, 1.3], ['Expire', 4, 1]]
+      },
+      quadrada: {
+        desc: 'Inspire 4, segure 4, expire 4 e segure 4. Ajuda a focar e acalmar.',
+        phases: [['Inspire', 4, 1.3], ['Segure', 4, 1.3], ['Expire', 4, 1], ['Segure', 4, 1]]
+      },
+      relaxante: {
+        desc: 'Inspire 4, segure 7 e expire devagar por 8. Indicada para relaxar antes de dormir.',
+        phases: [['Inspire', 4, 1.3], ['Segure', 7, 1.3], ['Expire', 8, 1]]
+      }
+    };
+    let pattern = 'simples', breathActive = false, breathTimer = null, cycles = 0;
+    const circle = $('breath-circle');
+
+    function setBreathDesc() { $('breath-desc').textContent = PATTERNS[pattern].desc; }
+    function stopBreath() {
+      breathActive = false;
+      clearTimeout(breathTimer);
+      circle.style.transitionDuration = '0.6s';
+      circle.style.transform = 'scale(1)';
+      $('breath-text').textContent = 'Respire';
+      $('breath-count').textContent = '';
+      $('breath-start').textContent = 'Iniciar exercício';
+    }
+    function runPhase(i, remaining) {
+      if (!breathActive) return;
+      const phases = PATTERNS[pattern].phases;
+      const [label, secs, scale] = phases[i];
+      if (remaining === undefined) {
+        remaining = secs;
+        $('breath-text').textContent = label + '...';
+        circle.style.transitionDuration = secs + 's';
+        circle.style.transform = `scale(${scale})`;
+      }
+      $('breath-count').textContent = remaining;
+      breathTimer = setTimeout(() => {
+        if (remaining > 1) return runPhase(i, remaining - 1);
+        const next = (i + 1) % phases.length;
+        if (next === 0) { cycles++; $('breath-cycles').textContent = `Ciclos completos: ${cycles}`; }
+        runPhase(next);
+      }, 1000);
+    }
+    $('breath-start').addEventListener('click', () => {
+      if (breathActive) return stopBreath();
+      breathActive = true;
+      cycles = 0;
+      $('breath-cycles').textContent = 'Ciclos completos: 0';
+      $('breath-start').textContent = 'Parar exercício';
+      runPhase(0);
+    });
+    $('breath-patterns').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-pattern]'); if (!btn) return;
+      $('breath-patterns').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+      pattern = btn.dataset.pattern;
+      setBreathDesc();
+      if (breathActive) stopBreath();
+    });
+    setBreathDesc();
+
+    /* ================= TERMÔMETRO ================= */
+    const LEVELS = {
+      1: { title: '😌 Calmo', text: 'Seu corpo está tranquilo e você consegue pensar com clareza.',
+           tips: ['Aproveite para fazer atividades que exigem concentração.', 'Perceba o que está ajudando você a se sentir assim.', 'Que tal anotar isso para lembrar depois?'] },
+      2: { title: '🙂 Bem', text: 'Você está bem, talvez com um pouco de energia ou empolgação.',
+           tips: ['Continue com sua rotina normalmente.', 'Faça pequenas pausas entre as atividades.', 'Beba água e lembre-se de se alimentar.'] },
+      3: { title: '😕 Incomodado', text: 'Algo está te incomodando: barulho, luz, uma mudança ou uma preocupação.',
+           tips: ['Tente identificar o que está incomodando.', 'Use fones abafadores ou os sons relaxantes desta página.', 'Faça alguns ciclos da respiração guiada.', 'Avise alguém de confiança como você está.'] },
+      4: { title: '😣 Muito agitado', text: 'A sensação está forte. Pode ser difícil se concentrar ou conversar.',
+           tips: ['Se possível, vá para um lugar mais calmo e silencioso.', 'Faça a respiração relaxante (4-7-8).', 'Use seu objeto de conforto ou algo para apertar.', 'Diga ou mostre: “Preciso de uma pausa”.'] },
+      5: { title: '😫 Sobrecarregado', text: 'É muita coisa ao mesmo tempo. Seu corpo precisa de descanso e segurança agora.',
+           tips: ['Pare o que estiver fazendo — está tudo bem.', 'Procure seu cantinho seguro ou um lugar com pouca luz e som.', 'Peça ajuda a uma pessoa de confiança.', 'Respire devagar. Essa sensação vai passar.'] }
+    };
+    $('thermo-levels').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-level]'); if (!btn) return;
+      $('thermo-levels').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+      const lvl = LEVELS[btn.dataset.level];
+      const panel = $('thermo-panel');
+      panel.innerHTML = '';
+      const h = document.createElement('h4'); h.textContent = lvl.title;
+      const p = document.createElement('p'); p.textContent = lvl.text;
+      p.style.cssText = 'color:var(--clr-text-secondary);margin-bottom:var(--sp-3);';
+      const lbl = document.createElement('p'); lbl.className = 'form-label'; lbl.textContent = 'O que pode ajudar:';
+      const ul = document.createElement('ul'); ul.className = 'tl-list';
+      lvl.tips.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.appendChild(li); });
+      panel.append(h, p, lbl, ul);
+    });
+
+    /* ================= SONS ================= */
+    let soundNodes = null, currentSound = null;
+    const masterVolume = () => Number($('sound-volume').value) / 100 * 0.5;
+
+    function noiseBuffer(ctx, type) {
+      const len = ctx.sampleRate * 4;
+      const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+      const d = buf.getChannelData(0);
+      let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0, last = 0;
+      for (let i = 0; i < len; i++) {
+        const w = Math.random() * 2 - 1;
+        if (type === 'pink') {
+          b0 = 0.99886 * b0 + w * 0.0555179; b1 = 0.99332 * b1 + w * 0.0750759;
+          b2 = 0.96900 * b2 + w * 0.1538520; b3 = 0.86650 * b3 + w * 0.3104856;
+          b4 = 0.55000 * b4 + w * 0.5329522; b5 = -0.7616 * b5 - w * 0.0168980;
+          d[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + w * 0.5362) * 0.11; b6 = w * 0.115926;
+        } else if (type === 'brown') {
+          last = (last + 0.02 * w) / 1.02; d[i] = last * 3.5;
+        } else {
+          d[i] = w * 0.5;
+        }
+      }
+      return buf;
+    }
+    function stopSound() {
+      if (soundNodes) {
+        const ctx = getAudio();
+        const { gain, sources } = soundNodes;
+        gain.gain.setTargetAtTime(0, ctx.currentTime, 0.3);
+        setTimeout(() => sources.forEach(s => { try { s.stop(); } catch {} }), 1200);
+      }
+      soundNodes = null; currentSound = null;
+      $('sound-buttons').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false'));
+    }
+    function playSound(kind) {
+      const ctx = getAudio();
+      if (!ctx) { toast('Seu navegador não suporta reprodução de áudio.', 'error'); return; }
+      stopSound();
+      const gain = ctx.createGain();
+      gain.gain.value = 0;
+      gain.connect(ctx.destination);
+      const src = ctx.createBufferSource();
+      src.loop = true;
+      const sources = [src];
+
+      if (kind === 'chuva') {
+        src.buffer = noiseBuffer(ctx, 'pink');
+        const hp = ctx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 400;
+        const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 6000;
+        src.connect(hp).connect(lp).connect(gain);
+      } else if (kind === 'mar') {
+        src.buffer = noiseBuffer(ctx, 'brown');
+        const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 900;
+        const swell = ctx.createGain(); swell.gain.value = 0.6;
+        const lfo = ctx.createOscillator(); lfo.frequency.value = 0.09;
+        const lfoGain = ctx.createGain(); lfoGain.gain.value = 0.4;
+        lfo.connect(lfoGain).connect(swell.gain);
+        src.connect(lp).connect(swell).connect(gain);
+        lfo.start(); sources.push(lfo);
+      } else if (kind === 'vento') {
+        src.buffer = noiseBuffer(ctx, 'brown');
+        const bp = ctx.createBiquadFilter(); bp.type = 'bandpass'; bp.frequency.value = 400; bp.Q.value = 0.8;
+        const lfo = ctx.createOscillator(); lfo.frequency.value = 0.05;
+        const lfoGain = ctx.createGain(); lfoGain.gain.value = 250;
+        lfo.connect(lfoGain).connect(bp.frequency);
+        src.connect(bp).connect(gain);
+        lfo.start(); sources.push(lfo);
+      } else {
+        src.buffer = noiseBuffer(ctx, 'white');
+        const lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 8000;
+        src.connect(lp).connect(gain);
+      }
+      src.start();
+      gain.gain.setTargetAtTime(masterVolume(), ctx.currentTime, 0.5); // entrada suave
+      soundNodes = { gain, sources };
+      currentSound = kind;
+    }
+    $('sound-buttons').addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-sound]'); if (!btn) return;
+      if (currentSound === btn.dataset.sound) { stopSound(); return; }
+      playSound(btn.dataset.sound);
+      btn.setAttribute('aria-pressed', 'true');
+    });
+    $('sound-volume').addEventListener('input', () => {
+      if (soundNodes) soundNodes.gain.gain.setTargetAtTime(masterVolume(), getAudio().currentTime, 0.1);
+    });
+    $('sound-stop').addEventListener('click', stopSound);
+
+    /* ================= EXPRESSÕES FACIAIS ================= */
+    const FACES = [
+      { name: 'Alegria', emoji: '😄', eyes: 'Olhos “apertadinhos”, com ruguinhas nos cantos.', mouth: 'Cantos da boca para cima; às vezes mostra os dentes.', brows: 'Relaxadas.', means: 'A pessoa está feliz, gostou de algo ou achou graça.' },
+      { name: 'Tristeza', emoji: '😢', eyes: 'Olhar para baixo; pálpebras caídas; podem ter lágrimas.', mouth: 'Cantos da boca para baixo.', brows: 'Parte de dentro levantada.', means: 'A pessoa pode estar chateada ou precisando de apoio.' },
+      { name: 'Raiva', emoji: '😠', eyes: 'Olhar fixo e intenso.', mouth: 'Lábios apertados ou dentes cerrados.', brows: 'Abaixadas e juntas, formando uma ruga no meio.', means: 'A pessoa está irritada ou incomodada com algo.' },
+      { name: 'Medo', emoji: '😨', eyes: 'Bem abertos, mostrando a parte branca.', mouth: 'Aberta e esticada para os lados.', brows: 'Levantadas e juntas.', means: 'A pessoa se sente assustada ou ameaçada.' },
+      { name: 'Surpresa', emoji: '😮', eyes: 'Arregalados.', mouth: 'Aberta, em formato de “O”.', brows: 'Bem levantadas e curvadas.', means: 'Algo inesperado aconteceu — pode ser bom ou ruim.' },
+      { name: 'Nojo', emoji: '🤢', eyes: 'Um pouco fechados.', mouth: 'Lábio de cima levantado; nariz franzido.', brows: 'Abaixadas.', means: 'A pessoa achou algo desagradável (cheiro, gosto, situação).' }
+    ];
+    const grid = $('faces-grid');
+    FACES.forEach(f => {
+      const card = document.createElement('div');
+      card.className = 'card tl-face';
+      card.style.cssText = 'background:var(--clr-bg-alt);box-shadow:none;';
+      const em = document.createElement('div'); em.className = 'tl-face__emoji'; em.setAttribute('aria-hidden', 'true'); em.textContent = f.emoji;
+      const h = document.createElement('h4'); h.textContent = f.name;
+      card.append(em, h);
+      [['👀 Olhos', f.eyes], ['👄 Boca', f.mouth], ['〰️ Sobrancelhas', f.brows], ['💭 Pode significar', f.means]].forEach(([k, v]) => {
+        const p = document.createElement('p');
+        const s = document.createElement('strong'); s.textContent = k + ': ';
+        p.append(s, document.createTextNode(v));
+        card.appendChild(p);
+      });
+      grid.appendChild(card);
+    });
+
+    let quizAnswer = null, quizAnswered = false, quizHits = 0, quizTotal = 0, lastIdx = -1;
+    function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+    function nextQuestion() {
+      let idx;
+      do { idx = Math.floor(Math.random() * FACES.length); } while (idx === lastIdx);
+      lastIdx = idx;
+      quizAnswer = FACES[idx];
+      quizAnswered = false;
+      $('quiz-clue').textContent = `“${quizAnswer.eyes} ${quizAnswer.mouth} Sobrancelhas: ${quizAnswer.brows.toLowerCase()}”`;
+      $('quiz-feedback').textContent = '';
+      const others = shuffle(FACES.filter(f => f !== quizAnswer)).slice(0, 3);
+      const opts = shuffle([quizAnswer, ...others]);
+      const box = $('quiz-opts');
+      box.innerHTML = '';
+      opts.forEach(o => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'btn btn--secondary tl-btn-sm';
+        b.textContent = o.name;
+        b.addEventListener('click', () => {
+          if (quizAnswered) return;
+          quizAnswered = true;
+          quizTotal++;
+          const ok = o === quizAnswer;
+          if (ok) quizHits++;
+          b.classList.add(ok ? 'correct' : 'wrong');
+          box.querySelectorAll('button').forEach(x => { if (x.textContent === quizAnswer.name) x.classList.add('correct'); });
+          $('quiz-feedback').textContent = ok
+            ? `Isso mesmo! ${quizAnswer.emoji} ${quizAnswer.name}`
+            : `Quase! A resposta era ${quizAnswer.emoji} ${quizAnswer.name}. Continue tentando!`;
+          $('quiz-score').textContent = `Acertos: ${quizHits} de ${quizTotal}`;
+        });
+        box.appendChild(b);
+      });
+    }
+    $('quiz-next').addEventListener('click', nextQuestion);
+    nextQuestion();
+
+    // Para timer/sons ao sair da página
+    window.addEventListener('pagehide', () => { stopSound(); stopBreath(); });
+  })();
+  </script>
+</body>
+</html>
